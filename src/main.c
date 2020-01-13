@@ -1,41 +1,41 @@
 #include "../inc/fdf.h"
-#include <stdio.h>
 
-int main(void)
+int main(int argc, char **argv)
 {
-	t_mlx_data	data;
-	t_point p1;
-	t_point p2;
-
-	data.mlx_ptr = mlx_init();
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 500, 500, "test");
-	p1.x = 200;
-	p1.y = 0;
-
-	p2.x = 0;
-	p2.y = 500;
-	print_line(&data, p1, p2);
-	mlx_loop(data.mlx_ptr);
-	printf("OK\n");
+	if (argc != 2)
+		printf("usage: ./fdf <map>\n");
+	else
+		ft_fdf(argv[1]);
 	return (0);
 }
 
-int	mouse_hook(int button, int x, int y, void *param)
- {
- 	t_point p;
+int	ft_fdf(char *map_path)
+{
+	int			fd;
+	t_fdf		fdf;
 
- 	(void)button;
- 	printf("Mouse hook\n");
- 	p.x = x;
- 	p.y = y;
- 	param = &p;
- 	return (1);
- }
+	if ((fd = open((const char*)map_path, O_RDONLY)) == -1)
+		return (0);
+	init_map(&fdf);
+	if (check_map(fd, &fdf))
+	{
+		ft_display(&fdf);
+	}
+	free_map_lines(&fdf);
+	close(fd);
+	return (1);
+}
 
-int	key_hook(int key, void *param)
- {
- 	(void)key;
- 	(void)param;
- 	printf("Key hook\n");
- 	return (1);
- }
+void	init_map(t_fdf *fdf)
+{
+	fdf->proj = 1;
+	fdf->zoom = 1;
+	fdf->altitude = 2;
+	fdf->x_shift = 500;
+	fdf->y_shift = 150;
+	fdf->mlx.mlx_ptr = mlx_init();
+	fdf->mlx.win_ptr = mlx_new_window(fdf->mlx.mlx_ptr, 1200, 800, "FdF");
+	fdf->map.nbcol = -1;
+	fdf->map.nbline = 0;
+	fdf->map.list = NULL;
+}

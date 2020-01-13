@@ -27,6 +27,7 @@ typedef struct		s_word
 	int				len;
 }					t_word;
 
+int					ft_abs(int a);
 int					ft_atoi_base(char *str, char *base);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -45,6 +46,7 @@ void				ft_lstdelone(t_list **alst, void (*del)(void *,
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
+int					ft_max(int a, int b);
 void				*ft_memalloc(size_t size);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
@@ -53,6 +55,7 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				ft_memdel(void **ap);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memset(void *b, int c, size_t len);
+int					ft_min(int a, int b);
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl(char const *s);

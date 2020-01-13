@@ -1,5 +1,4 @@
 #include "../inc/fdf.h"
-#include <stdio.h>
 
 int	 print_line(t_mlx_data *data, t_point p1, t_point p2)
 {
@@ -75,8 +74,11 @@ void	swap_points(t_point *a, t_point *b)
 
 	tmp.x = a->x;
 	tmp.y = a->y;
+	tmp.z = a->z;
 	a->x = b->x;
 	a->y = b->y;
+	a->z = b->z;
 	b->x = tmp.x;
 	b->y = tmp.y;
+	b->z = tmp.z;
 }

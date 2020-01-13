@@ -9,7 +9,7 @@ MLX_INC = -I/usr/X11/include
 MLX_FLAGS = -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
 
 SRC_FOLDER = ./src/
-SRC_FILES = main.c print_line.c utils.c
+SRC_FILES = check.c draw.c free.c main.c print_line.c
 SRC = $(addprefix $(SRC_FOLDER), $(SRC_FILES))
 
 OBJ_FOLDER = ./obj/
@@ -20,23 +20,30 @@ HDR_FOLDER = ./inc/
 HDR_FILES = fdf.h
 HDR = $(addprefix $(HDR_FOLDER), $(HDR_FILES))
 
+LIB_FOLDER = ./libft/
+LIB_INC = ./libft/includes
+LIB_FLAGS = -L $(LIB_FOLDER) -lft
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc $(MLX_FLAGS) $(OBJ) -o $(NAME)
+	@make -C $(LIB_FOLDER)
+	@gcc $(OBJ) $(MLX_FLAGS) $(LIB_FLAGS) -o $(NAME)
 
 $(OBJ_FOLDER)%.o:$(SRC_FOLDER)%.c $(HDR)
-	mkdir -p $(OBJ_FOLDER)
-	$(CC) $(CFLAGS) -I$(HDR_FOLDER) $(MLX_INC) -c -o $@ $<
+	@mkdir -p $(OBJ_FOLDER)
+	@$(CC) $(CFLAGS) -I$(HDR_FOLDER) -I$(LIB_INC) $(MLX_INC) -c -o $@ $<
 
 clean:
-	rm -rf $(OBJ) $(OBJ_FOLDER)
+	@make -C $(LIB_FOLDER) clean
+	@rm -rf $(OBJ) $(OBJ_FOLDER)
 
 fclean: clean
-	rm -rf $(NAME)
+	@make -C $(LIB_FOLDER) fclean
+	@rm -rf $(NAME)
 
 re:
-	$(MAKE) fclean
-	$(MAKE) all
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 .PHONY: all clean fclean re
