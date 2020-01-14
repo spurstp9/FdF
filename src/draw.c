@@ -7,6 +7,7 @@ void	draw_segment(t_fdf *fdf, t_point a, t_point b)
 {
 	if (b.x > -1)
 	{
+		// printf("Points avant la transformation : a = (%d, %d); b = (%d, %d)\n", a.x, a.y, b.x, b.y);
 		a.x *= (30 * fdf->zoom);
 		a.y *= (30 * fdf->zoom);
 		a.z *= (fdf->altitude * fdf->zoom);
@@ -19,7 +20,7 @@ void	draw_segment(t_fdf *fdf, t_point a, t_point b)
 		b.x += fdf->x_shift;
 		a.y += fdf->y_shift;
 		b.y += fdf->y_shift;
-		print_line(&(fdf->mlx), a, b);
+		print_line_img(&(fdf->mlx), a, b);
 	}
 }
 
@@ -36,9 +37,24 @@ void	iso(t_point *p)
 
 void	ft_display(t_fdf *fdf)
 {
-	mlx_clear_window(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr);
-	display_menu(fdf);
+	int i;
+
+	i = 0;
+	// mlx_clear_window(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr);
+	if (fdf->mlx.img_ptr)
+		mlx_destroy_image (fdf->mlx.mlx_ptr, fdf->mlx.img_ptr);
+	fdf->mlx.img_ptr = mlx_new_image(fdf->mlx.mlx_ptr, 1200, 800);
+	fdf->mlx.img_data = mlx_get_data_addr(fdf->mlx.img_ptr, &(fdf->mlx.bpp), &(fdf->mlx.size_line), &(fdf->mlx.endian));
+	// while (i < 5000000)
+	// {
+	// 	fdf->mlx.img_data[i] = 1;
+	// 	printf("%d\n", i);
+	// 	i++;
+	// }
+	// printf("Nb de lignes : %d\nNb de colonnes : %d\n", fdf->map.nbline, fdf->map.nbcol);
+	// printf("Taille de img_data : %lu\n", sizeof(fdf->mlx.img_data));
 	draw_map(fdf);
+	display_menu(fdf);
 }
 
 void	display_menu(t_fdf *fdf)
@@ -79,6 +95,7 @@ void	draw_map(t_fdf *fdf)
 		i++;
 		line = line->next;
 	}
+	mlx_put_image_to_window(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, fdf->mlx.img_ptr, 0, 0);
 	mlx_key_hook(fdf->mlx.win_ptr, &key_hook, fdf);
 	mlx_loop(fdf->mlx.mlx_ptr);
 }

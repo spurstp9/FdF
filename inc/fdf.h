@@ -1,6 +1,8 @@
 #ifndef FDF_H
 
 # define FDF_H
+# define WIN_HEIGHT 1200
+# define WIN_WIDTH 800
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
@@ -29,6 +31,11 @@ typedef struct			s_mlx_data
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
+	void				*img_ptr;
+	char				*img_data;
+	int					bpp;
+	int					size_line;
+	int					endian;
 }						t_mlx_data;
 
 typedef struct			s_map
@@ -68,6 +75,9 @@ int		key_hook(int keycode, void *param);
 int		print_line(t_mlx_data *data, t_point p1, t_point p2);
 int		print_line_case1(t_mlx_data *data, t_point p1, t_point p2);
 int		print_line_case2(t_mlx_data *data, t_point p1, t_point p2);
+int		print_line_img(t_mlx_data *data, t_point p1, t_point p2);
+int		print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2);
+int		print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2);
 void	print_tab(t_fdf *fdf);
 int		split_line(char **line, char **tmp, char ***stock);
 void	swap_points(t_point *a, t_point *b);

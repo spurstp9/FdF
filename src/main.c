@@ -34,7 +34,8 @@ void	init_map(t_fdf *fdf)
 	fdf->x_shift = 500;
 	fdf->y_shift = 150;
 	fdf->mlx.mlx_ptr = mlx_init();
-	fdf->mlx.win_ptr = mlx_new_window(fdf->mlx.mlx_ptr, 1200, 800, "FdF");
+	fdf->mlx.win_ptr = mlx_new_window(fdf->mlx.mlx_ptr, WIN_HEIGHT, WIN_WIDTH, "FdF");
+	fdf->mlx.img_ptr = NULL;
 	fdf->map.nbcol = -1;
 	fdf->map.nbline = 0;
 	fdf->map.list = NULL;
