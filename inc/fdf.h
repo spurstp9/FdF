@@ -1,8 +1,9 @@
 #ifndef FDF_H
 
 # define FDF_H
-# define WIN_HEIGHT 1200
-# define WIN_WIDTH 800
+# define WIN_HEIGHT 738
+# define WIN_WIDTH 1268
+# define WHITE 0xFFFFFF
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
@@ -57,6 +58,7 @@ typedef struct			s_fdf
 }						t_fdf;
 
 int		add_to_list(t_fdf *fdf, char **stock);
+void	cabinet(t_point *p);
 int		check_map(int fd, t_fdf *fdf);
 int		deal_nb_col(t_fdf *fdf, char **stock);
 void	display_menu(t_fdf *fdf);
@@ -69,7 +71,7 @@ int		ft_fdf(char *map_path);
 int		get_data(t_fdf *fdf,t_map_line *new, char **stock);
 void	get_point_on_the_right(t_fdf *fdf, t_map_line *line, t_point a, t_point *b);
 void	get_point_under(t_fdf *fdf, t_map_line *line, t_point a, t_point *b);
-void	init_map(t_fdf *fdf);
+void	init_map(t_fdf *fdf, char proj);
 void	iso(t_point *p);
 int		key_hook(int keycode, void *param);
 int		print_line(t_mlx_data *data, t_point p1, t_point p2);

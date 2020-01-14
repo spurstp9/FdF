@@ -16,7 +16,7 @@ int	ft_fdf(char *map_path)
 
 	if ((fd = open((const char*)map_path, O_RDONLY)) == -1)
 		return (0);
-	init_map(&fdf);
+	init_map(&fdf, 1);
 	if (check_map(fd, &fdf))
 	{
 		ft_display(&fdf);
@@ -26,15 +26,15 @@ int	ft_fdf(char *map_path)
 	return (1);
 }
 
-void	init_map(t_fdf *fdf)
+void	init_map(t_fdf *fdf, char proj)
 {
-	fdf->proj = 1;
-	fdf->zoom = 1;
+	fdf->proj = proj;
+	fdf->zoom = 0.5;
 	fdf->altitude = 2;
 	fdf->x_shift = 500;
-	fdf->y_shift = 150;
+	fdf->y_shift = 200;
 	fdf->mlx.mlx_ptr = mlx_init();
-	fdf->mlx.win_ptr = mlx_new_window(fdf->mlx.mlx_ptr, WIN_HEIGHT, WIN_WIDTH, "FdF");
+	fdf->mlx.win_ptr = mlx_new_window(fdf->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FdF");
 	fdf->mlx.img_ptr = NULL;
 	fdf->map.nbcol = -1;
 	fdf->map.nbline = 0;

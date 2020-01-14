@@ -37,11 +37,11 @@ int	print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2)
 			e += (2 * dx);
 		}
 		// printf("Indice première case : %d\n", p1.x * 4 + data->size_line * p1.y);
-		if (p1.x * 4 + data->size_line * p1.y + 3 < WIN_HEIGHT * WIN_WIDTH * 4)
+		if (0 <= p1.x && p1.x < WIN_WIDTH && 0 <= p1.y && p1.y < WIN_HEIGHT)
 		{
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y] = -100;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 1] = -100;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 2] = 0;
+			(data->img_data)[p1.x * 4 + data->size_line * p1.y] = 0xFF;
+			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 1] = 0xFF;
+			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 2] = 0xFF;
 			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 3] = 0;
 		}
 		p1.x++;
@@ -72,11 +72,11 @@ int	print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2)
 			e += (2 * dy);
 		}
 		// printf("Indice première case : %d\n", p1.x * 4 + data->size_line * p1.y);
-		if (p1.x * 4 + data->size_line * p1.y + 3 < WIN_HEIGHT * WIN_WIDTH * 4)
+		if (0 <= p1.x && p1.x < WIN_WIDTH && 0 <= p1.y && p1.y < WIN_HEIGHT)
 		{
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y] = -100;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 1] = -100;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 2] = 0;
+			(data->img_data)[p1.x * 4 + data->size_line * p1.y] = 0xFF;
+			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 1] = 0xFF;
+			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 2] = 0xFF;
 			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 3] = 0;
 		}
 		p1.y++;
