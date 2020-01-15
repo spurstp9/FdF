@@ -2,9 +2,9 @@
 
 void	change_altitude_zoom_shift(t_fdf *fdf, int keycode)
 {
-	if (keycode == 126)
+	if (keycode == 13)
 		fdf->altitude += 3;
-	else if (keycode == 125)
+	else if (keycode == 1)
 		fdf->altitude -= 3;
 	else if (keycode == 24)
 		fdf->zoom += 0.02;
@@ -14,13 +14,13 @@ void	change_altitude_zoom_shift(t_fdf *fdf, int keycode)
 		if (fdf->zoom < 0.02)
 			fdf->zoom = 0.02;
 	}
-	else if (keycode == 13)
+	else if (keycode == 126)
 		fdf->y_shift -= 10;
-	else if (keycode == 1)
+	else if (keycode == 125)
 		fdf->y_shift += 10;
-	else if (keycode == 0)
+	else if (keycode == 123)
 		fdf->x_shift -= 10;
-	else if (keycode == 2)
+	else if (keycode == 124)
 		fdf->x_shift += 10;
 }
 
@@ -47,8 +47,8 @@ int		key_hook(int keycode, void *param)
 		free_map_lines((t_fdf*)param);
 		exit(0);
 	}
-	else if (keycode == 126 || keycode == 125 || keycode == 24 || keycode == 27
-		|| keycode == 13 || keycode == 1 || keycode == 0 || keycode == 2)
+	else if (keycode == 13 || keycode == 1 || keycode == 24 || keycode == 27
+		|| keycode == 123 || keycode == 124 || keycode == 125 || keycode == 126)
 		change_altitude_zoom_shift((t_fdf*)param, keycode);
 	else if (keycode == 6)
 		reset_fdf((t_fdf*)param, ((t_fdf*)param)->proj);

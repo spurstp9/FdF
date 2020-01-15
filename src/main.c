@@ -19,6 +19,7 @@ int	ft_fdf(char *map_path)
 	init_fdf(&fdf, 1);
 	if (check_map(fd, &fdf))
 	{
+		printf("Nombre de colonnes : %d\nNombre de lignes : %d\n", fdf.map.nbcol, fdf.map.nbline);
 		ft_display(&fdf);
 	}
 	free_map_lines(&fdf);
