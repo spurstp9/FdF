@@ -7,8 +7,16 @@ void	draw_segment(t_fdf *fdf, t_point a, t_point b)
 {
 	if (b.x > -1)
 	{
-		// printf("Points avant la transformation : a = (%d, %d); b = (%d, %d)\n", a.x, a.y, b.x, b.y);
-		apply_zoom_altitude_rotation(fdf, &a, &b);
+		// printf("Altitude de a : %d   Couleur de a : %d\n", a.z, a.color);
+		// printf("Altitude de b : %d   Couleur de b : %d\n", b.z, b.color);
+		apply_zoom_altitude(fdf, &a);
+		apply_zoom_altitude(fdf, &b);
+		set_point_color(fdf, &a);
+		set_point_color(fdf, &b);
+		// printf("Altitude de a : %d   Couleur de a : %d\n", a.z, a.color);
+		// printf("Altitude de b : %d   Couleur de b : %d\n", b.z, b.color);
+		apply_rotation(fdf, &a);
+		apply_rotation(fdf, &b);
 		apply_proj(fdf, &a, &b);
 		a.x += fdf->x_shift;
 		b.x += fdf->x_shift;
@@ -17,6 +25,21 @@ void	draw_segment(t_fdf *fdf, t_point a, t_point b)
 		print_line_img(&(fdf->mlx), a, b);
 	}
 }
+
+// void	set_color(t_fdf *fdf, t_point *p)
+// {
+// 	t_gradient grad;
+// 	t_point start;
+// 	t_point finish;
+
+// 	start.z = fdf->new_alt_min;
+// 	start.color = fdf->color;
+// 	finish.z = fdf->new_alt_max;
+// 	finish.color = 0xFFFFFF;
+// 	grad.start = start;
+// 	grad.finish = finish;
+// 	p->color = get_gradient(grad, *p, 3);
+// }
 
 void	ft_display(t_fdf *fdf)
 {
@@ -27,10 +50,57 @@ void	ft_display(t_fdf *fdf)
 		fdf->mlx.img_ptr = mlx_new_image(fdf->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 		fdf->mlx.img_data = mlx_get_data_addr(fdf->mlx.img_ptr, &(fdf->mlx.bpp), &(fdf->mlx.size_line), &(fdf->mlx.endian));
 	}
+	fdf->new_alt_min = fdf->alt_min * (fdf->altitude * fdf->zoom);
+	fdf->new_alt_max = fdf->alt_max * (fdf->altitude * fdf->zoom);
 	draw_map(fdf);
+	// print_tab(fdf);
 	display_menu(fdf);
 	mlx_hook(fdf->mlx.win_ptr, 2, 0, &key_hook, fdf);
 	mlx_loop(fdf->mlx.mlx_ptr);
+}
+
+void	get_alt_max(t_fdf *fdf)
+{
+	int			i;
+	int			j;
+	t_map_line *line;
+
+	i = 0;
+	line = fdf->map.list;
+	fdf->alt_max = ((line->tab)[0]).z;
+	while (i < fdf->map.nbline)
+	{
+		j = 0;
+		while (j < fdf->map.nbcol)
+		{
+			fdf->alt_max = ft_max(fdf->alt_max, ((line->tab)[j]).z);
+			j++;
+		}
+		i++;
+		line = line->next;
+	}
+}
+
+void	get_alt_min(t_fdf *fdf)
+{
+	int			i;
+	int			j;
+	t_map_line *line;
+
+	i = 0;
+	line = fdf->map.list;
+	fdf->alt_min = ((line->tab)[0]).z;
+	while (i < fdf->map.nbline)
+	{
+		j = 0;
+		while (j < fdf->map.nbcol)
+		{
+			fdf->alt_min = ft_min(fdf->alt_min, ((line->tab)[j]).z);
+			j++;
+		}
+		i++;
+		line = line->next;
+	}
 }
 
 void	display_menu(t_fdf *fdf)
@@ -67,12 +137,10 @@ void	draw_map(t_fdf *fdf)
 	i = -1;
 	while (++i < fdf->map.nbline)
 	{
-		a.y = i;
 		j = -1;
 		while (++j < fdf->map.nbcol)
 		{
-			a.x = j;
-			a.z = line->tab[j];
+			a = line->tab[j];
 			get_point_on_the_right(fdf, line, a, &b);
 			draw_segment(fdf, a, b);
 			get_point_under(fdf, line, a, &b);

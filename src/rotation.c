@@ -1,19 +1,17 @@
 #include "../inc/fdf.h"
 
-void	apply_zoom_altitude_rotation(t_fdf *fdf, t_point *a, t_point *b)
+void	apply_zoom_altitude(t_fdf *fdf, t_point *a)
 {
 	a->x *= (30 * fdf->zoom);
 	a->y *= (30 * fdf->zoom);
 	a->z *= (fdf->altitude * fdf->zoom);
-	b->x *= (30 * fdf->zoom);
-	b->y *= (30 * fdf->zoom);
-	b->z *= (fdf->altitude * fdf->zoom);
+}
+
+void	apply_rotation(t_fdf *fdf, t_point *a)
+{
 	x_rotation(a, fdf->x_rotation);
-	x_rotation(b, fdf->x_rotation);
 	y_rotation(a, fdf->y_rotation);
-	y_rotation(b, fdf->y_rotation);
 	z_rotation(a, fdf->z_rotation);
-	z_rotation(b, fdf->z_rotation);
 }
 
 void	x_rotation(t_point *a, float angle)

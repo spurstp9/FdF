@@ -18,7 +18,6 @@ int	check_map(int fd, t_fdf *fdf)
 		if (!add_to_list(fdf, stock))
 			return (free_check_var(&line, &stock, fdf->map.nbcol, 0));
 	}
-	// print_tab(map);
 	return (free_check_var(&line, &stock, fdf->map.nbcol, 1));
 }
 
@@ -66,11 +65,13 @@ int	get_data(t_fdf *fdf, t_map_line *new, char **stock)
 	int i;
 
 	i = 0;
-	if (!((new->tab) = (int*)malloc(sizeof(int) * fdf->map.nbcol)))
+	if (!((new->tab) = (t_point*)malloc(sizeof(t_point) * fdf->map.nbcol)))
 		return (0);
 	while (i < fdf->map.nbcol)
 	{
-		new->tab[i] = ft_atoi(stock[i]);
+		(new->tab[i]).x = i;
+		(new->tab[i]).y = fdf->map.nbline - 1;
+		(new->tab[i]).z = ft_atoi(stock[i]);
 		i++;
 	}
 	return (1);
@@ -87,9 +88,9 @@ void print_tab(t_fdf *fdf)
 		i = 0;
 		while (i < fdf->map.nbcol)
 		{
-			printf("%d ", line->tab[i]);
-			if (line->tab[i] < 10)
-				printf(" ");
+			printf("%d,%d  ", line->tab[i].z, line->tab[i].color);
+			// if (line->tab[i].z < 10)
+			// 	printf(" ");
 			i++;
 		}
 		printf("\n");

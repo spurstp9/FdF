@@ -20,6 +20,8 @@ int	ft_fdf(char *map_path)
 	if (check_map(fd, &fdf))
 	{
 		printf("Nombre de colonnes : %d\nNombre de lignes : %d\n", fdf.map.nbcol, fdf.map.nbline);
+		get_alt_max(&fdf);
+		get_alt_min(&fdf);
 		ft_display(&fdf);
 	}
 	free_map_lines(&fdf);
@@ -43,6 +45,8 @@ void	init_fdf(t_fdf *fdf, char proj)
 	fdf->map.nbcol = -1;
 	fdf->map.nbline = 0;
 	fdf->map.list = NULL;
+	fdf->color = 0x0000CD;
+	fdf->color_code = 1;
 }
 
 void	reset_fdf(t_fdf *fdf, char proj)

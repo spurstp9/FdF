@@ -59,9 +59,31 @@ int		key_hook(int keycode, void *param)
 		else
 			((t_fdf*)param)->proj = 1;
 	}
+	else if (keycode == 8)
+		change_color((t_fdf*)param);
 	else if (keycode == 15 || keycode == 17 || keycode == 3 || keycode == 5
 		|| keycode == 9 || keycode == 11)
 		change_rotation((t_fdf*)param, keycode);
 	ft_display((t_fdf*)param);
 	return (1);
+}
+
+int		color_code(int a)
+{
+	a = a % 5;
+	if (a == BLUE)
+		return (0x0000CD);
+	if (a == GREEN)
+		return (0x9ACD32);
+	if (a == ORANGE)
+		return (0xFFA500);
+	if (a == RED)
+		return (0xFF2500);
+	return (0xFFD700);
+}
+
+void	change_color(t_fdf *fdf)
+{
+	fdf->color_code++;
+	fdf->color = color_code(fdf->color_code);
 }
