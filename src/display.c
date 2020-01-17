@@ -9,10 +9,10 @@ void	draw_segment(t_fdf *fdf, t_point a, t_point b)
 	{
 		// printf("Altitude de a : %d   Couleur de a : %d\n", a.z, a.color);
 		// printf("Altitude de b : %d   Couleur de b : %d\n", b.z, b.color);
-		apply_zoom_altitude(fdf, &a);
-		apply_zoom_altitude(fdf, &b);
 		set_point_color(fdf, &a);
 		set_point_color(fdf, &b);
+		apply_zoom_altitude(fdf, &a);
+		apply_zoom_altitude(fdf, &b);
 		// printf("Altitude de a : %d   Couleur de a : %d\n", a.z, a.color);
 		// printf("Altitude de b : %d   Couleur de b : %d\n", b.z, b.color);
 		apply_rotation(fdf, &a);
@@ -52,6 +52,7 @@ void	ft_display(t_fdf *fdf)
 	}
 	fdf->new_alt_min = fdf->alt_min * (fdf->altitude * fdf->zoom);
 	fdf->new_alt_max = fdf->alt_max * (fdf->altitude * fdf->zoom);
+	fdf->color = set_fdf_color(fdf);
 	draw_map(fdf);
 	// print_tab(fdf);
 	display_menu(fdf);

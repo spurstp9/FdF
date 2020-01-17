@@ -3,12 +3,21 @@
 # define FDF_H
 # define WIN_HEIGHT 738
 # define WIN_WIDTH 1268
-# define BLUE 1
-# define GREEN 2
-# define ORANGE 3
-# define RED 4
-# define YELLOW 5
+# define AQUA_MARINE 0x7FFFD4
+# define BEIGE 0xF5F5DC
+# define BLUE 0x0000CD
+# define CORAL 0xFF7F50
+# define DARK_GREEN 0x006400
+# define GOLDEN_ROD 0xEDDA74
+# define GREEN 0x9ACD32
+# define MIDNIGHT_BLUE 0x151B54
+# define ORANGE 0xFFA500
+# define RED 0xFF2500
+# define SADDLEBROWN 0x8B4513
+# define SPRING_GREEN 0x4AA02C
+# define YELLOW 0xFFD700
 # define WHITE 0xFFFFFF
+# define WHITE_SMOKE 0xF5F5F5
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
@@ -83,10 +92,8 @@ void	apply_rotation(t_fdf *fdf, t_point *a);
 void	apply_zoom_altitude(t_fdf *fdf, t_point *a);
 void	cabinet(t_point *p);
 void	change_altitude_zoom_shift(t_fdf *fdf, int keycode);
-void	change_color(t_fdf *fdf);
 void	change_rotation(t_fdf *fdf, int keycode);
 int		check_map(int fd, t_fdf *fdf);
-int		color_code(int a);
 int		deal_nb_col(t_fdf *fdf, char **stock);
 void	display_menu(t_fdf *fdf);
 void	draw_map(t_fdf *fdf);
@@ -95,6 +102,8 @@ int		free_check_var(char **line, char ***stock, int len, int ret);
 int		free_map_lines(t_fdf *fdf);
 void	ft_display(t_fdf *fdf);
 int		ft_fdf(char *map_path);
+int		geo_mod(int z);
+int		geo_mod2(int z);
 void	get_alt_max(t_fdf *fdf);
 void	get_alt_min(t_fdf *fdf);
 int		get_gradient(t_gradient grad, t_point current, char axe);
@@ -112,6 +121,7 @@ int		print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2, t_gradient g
 void	print_tab(t_fdf *fdf);
 void	reset_fdf(t_fdf *fdf, char proj);
 // void	set_color(t_fdf *fdf, t_point *p);
+int		set_fdf_color(t_fdf *fdf);
 void	set_point_color(t_fdf *fdf, t_point *a);
 int		split_line(char **line, char **tmp, char ***stock);
 void	swap_points(t_point *a, t_point *b);
