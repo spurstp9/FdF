@@ -1,12 +1,5 @@
 #include "../inc/fdf.h"
 
-void	apply_zoom_altitude(t_fdf *fdf, t_point *a)
-{
-	a->x *= (30 * fdf->zoom);
-	a->y *= (30 * fdf->zoom);
-	a->z *= (fdf->altitude * fdf->zoom);
-}
-
 void	apply_rotation(t_fdf *fdf, t_point *a)
 {
 	x_rotation(a, fdf->x_rotation);
@@ -16,39 +9,33 @@ void	apply_rotation(t_fdf *fdf, t_point *a)
 
 void	x_rotation(t_point *a, float angle)
 {
-	int old_x;
-	int old_y;
-	int old_z;
+	int old_y2;
+	int old_z2;
 
-	old_x = a->x;
-	old_y = a->y;
-	old_z = a->z;
-	a->y = old_y * cos(angle) + old_z * sin(angle);
-	a->z = -old_y * sin(angle) + old_z * cos(angle);
+	old_y2 = a->y2;
+	old_z2 = a->z2;
+	a->y2 = old_y2 * cos(angle) + old_z2 * sin(angle);
+	a->z2 = -old_y2 * sin(angle) + old_z2 * cos(angle);
 }
 
 void	y_rotation(t_point *a, float angle)
 {
-	int old_x;
-	int old_y;
-	int old_z;
+	int old_x2;
+	int old_z2;
 
-	old_x = a->x;
-	old_y = a->y;
-	old_z = a->z;
-	a->x = old_x * cos(angle) + old_z * sin(angle);
-	a->z = -old_x * sin(angle) + old_z * cos(angle);
+	old_x2 = a->x2;
+	old_z2 = a->z2;
+	a->x2 = old_x2 * cos(angle) + old_z2 * sin(angle);
+	a->z2 = -old_x2 * sin(angle) + old_z2 * cos(angle);
 }
 
 void	z_rotation(t_point *a, float angle)
 {
-	int old_x;
-	int old_y;
-	int old_z;
+	int old_x2;
+	int old_y2;
 
-	old_x = a->x;
-	old_y = a->y;
-	old_z = a->z;
-	a->x = old_x * cos(angle) - old_y * sin(angle);
-	a->y = old_x * sin(angle) + old_y * cos(angle);
+	old_x2 = a->x2;
+	old_y2 = a->y2;
+	a->x2 = old_x2 * cos(angle) - old_y2 * sin(angle);
+	a->y2 = old_x2 * sin(angle) + old_y2 * cos(angle);
 }

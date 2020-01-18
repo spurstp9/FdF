@@ -8,9 +8,9 @@ int		get_gradient(t_gradient grad, t_point current, char axe)
 	int blue;
 
 	if (axe == 1)
-		percent = get_percentage(grad.start.x, grad.finish.x, current.x);
+		percent = get_percentage(grad.start.x2, grad.finish.x2, current.x2);
 	else if (axe == 2)
-		percent = get_percentage(grad.start.y, grad.finish.y, current.y);
+		percent = get_percentage(grad.start.y2, grad.finish.y2, current.y2);
 	else
 		percent = get_percentage(grad.start.z, grad.finish.z, current.z);
 	red = get_gradient_mix((grad.start.color >> 16) & 0xFF, (grad.finish.color >> 16) & 0xFF, percent);

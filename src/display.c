@@ -6,40 +6,8 @@
 void	draw_segment(t_fdf *fdf, t_point a, t_point b)
 {
 	if (b.x > -1)
-	{
-		// printf("Altitude de a : %d   Couleur de a : %d\n", a.z, a.color);
-		// printf("Altitude de b : %d   Couleur de b : %d\n", b.z, b.color);
-		set_point_color(fdf, &a);
-		set_point_color(fdf, &b);
-		apply_zoom_altitude(fdf, &a);
-		apply_zoom_altitude(fdf, &b);
-		// printf("Altitude de a : %d   Couleur de a : %d\n", a.z, a.color);
-		// printf("Altitude de b : %d   Couleur de b : %d\n", b.z, b.color);
-		apply_rotation(fdf, &a);
-		apply_rotation(fdf, &b);
-		apply_proj(fdf, &a, &b);
-		a.x += fdf->x_shift;
-		b.x += fdf->x_shift;
-		a.y += fdf->y_shift;
-		b.y += fdf->y_shift;
 		print_line_img(&(fdf->mlx), a, b);
-	}
 }
-
-// void	set_color(t_fdf *fdf, t_point *p)
-// {
-// 	t_gradient grad;
-// 	t_point start;
-// 	t_point finish;
-
-// 	start.z = fdf->new_alt_min;
-// 	start.color = fdf->color;
-// 	finish.z = fdf->new_alt_max;
-// 	finish.color = 0xFFFFFF;
-// 	grad.start = start;
-// 	grad.finish = finish;
-// 	p->color = get_gradient(grad, *p, 3);
-// }
 
 void	ft_display(t_fdf *fdf)
 {
@@ -50,11 +18,8 @@ void	ft_display(t_fdf *fdf)
 		fdf->mlx.img_ptr = mlx_new_image(fdf->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 		fdf->mlx.img_data = mlx_get_data_addr(fdf->mlx.img_ptr, &(fdf->mlx.bpp), &(fdf->mlx.size_line), &(fdf->mlx.endian));
 	}
-	fdf->new_alt_min = fdf->alt_min * (fdf->altitude * fdf->zoom);
-	fdf->new_alt_max = fdf->alt_max * (fdf->altitude * fdf->zoom);
-	fdf->color = set_fdf_color(fdf);
+	change_fdf(fdf);
 	draw_map(fdf);
-	// print_tab(fdf);
 	display_menu(fdf);
 	mlx_hook(fdf->mlx.win_ptr, 2, 0, &key_hook, fdf);
 	mlx_loop(fdf->mlx.mlx_ptr);

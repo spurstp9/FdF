@@ -16,7 +16,7 @@ int	free_check_var(char **line, char ***stock, int len, int ret)
 	return (ret);
 }
 
-int free_map_lines(t_fdf *fdf)
+int free_fdf(t_fdf *fdf)
 {
 	t_map_line *line;
 	t_map_line *next;
@@ -26,10 +26,17 @@ int free_map_lines(t_fdf *fdf)
 	{
 		next = line->next;
 		free(line->tab);
-		//free(line->color);
 		free(line);
 		line = next;
 	}
 	line = NULL;
+	free(fdf->mlx.mlx_ptr);
+	fdf->mlx.mlx_ptr = NULL;
+	free(fdf->mlx.win_ptr);
+	fdf->mlx.win_ptr = NULL;
+	free(fdf->mlx.img_ptr);
+	fdf->mlx.img_ptr = NULL;
+	free(fdf->mlx.img_data);
+	fdf->mlx.img_data = NULL;
 	return (1);
 }

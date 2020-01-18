@@ -1,37 +1,31 @@
 #include "../inc/fdf.h"
 
-void	apply_proj(t_fdf *fdf, t_point *a, t_point *b)
+void	apply_proj(t_fdf *fdf, t_point *a)
 {
 	if (fdf->proj == 1)
-		{
-			iso(a);
-			iso(b);
-		}
-		else
-		{
-			cabinet(a);
-			cabinet(b);
-		}
+		iso(a);
+	else
+		cabinet(a);
 }
 
 void	iso(t_point *p)
 {
-	int old_x;
-	int old_y;
+	int old_x2;
+	int old_y2;
 
-	old_x = p->x;
-	old_y = p->y;
-	(p->x) = (old_x - old_y) * cos(0.46373398);
-	(p->y) = -(p->z) + (old_x + old_y) * sin(0.46373398);
+	old_x2 = p->x2;
+	old_y2 = p->y2;
+	p->x2 = (old_x2 - old_y2) * cos(0.46373398);
+	p->y2 = -(p->z2) + (old_x2 + p->y2) * sin(0.46373398);
 }
 
 void	cabinet(t_point *p)
 {
-	int old_x;
-	int old_y;
+	int old_x2;
+	int old_y2;
 
-	old_x = p->x;
-	old_y = p->y;
-	(p->x) = old_x + p->z * cos(-1) * 0.5;
-	(p->y) = old_y + p->z * sin(-1) * 0.5;
+	old_x2 = p->x2;
+	old_y2 = p->y2;
+	p->x2 = old_x2 + p->z2 * cos(-1) * 0.5;
+	p->y2 = old_y2 + p->z2 * sin(-1) * 0.5;
 }

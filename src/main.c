@@ -19,12 +19,13 @@ int	ft_fdf(char *map_path)
 	init_fdf(&fdf, 1);
 	if (check_map(fd, &fdf))
 	{
-		printf("Nombre de colonnes : %d\nNombre de lignes : %d\n", fdf.map.nbcol, fdf.map.nbline);
+		// printf("Nombre de colonnes : %d\nNombre de lignes : %d\n", fdf.map.nbcol, fdf.map.nbline);
 		get_alt_max(&fdf);
 		get_alt_min(&fdf);
+		change_color(&fdf);
 		ft_display(&fdf);
 	}
-	free_map_lines(&fdf);
+	free_fdf(&fdf);
 	close(fd);
 	return (1);
 }
@@ -33,6 +34,7 @@ void	init_fdf(t_fdf *fdf, char proj)
 {
 	fdf->proj = proj;
 	fdf->zoom = 0.5;
+	fdf->magn = 30;
 	fdf->altitude = 3;
 	fdf->x_shift = 500;
 	fdf->y_shift = 200;

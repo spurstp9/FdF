@@ -6,11 +6,15 @@ int	 print_line_img(t_mlx_data *data, t_point p1, t_point p2)
 	int dy;
 	t_gradient	grad;
 
-	dx = ft_abs(p2.x - p1.x);
-	dy = ft_abs(p2.y - p1.y);
+	// printf("p1.x2 = %d p1.y2 = %d p1.z2 = %d\n", p1.x2, p1.y2, p1.x2);
+	// printf("p2.x2 = %d p2.y2 = %d p2.z2 = %d\n", p2.x2, p2.y2, p2.x2);
+	// printf("Couleur : %d\n", p1.color);
+	// printf("Couleur : %d\n", p2.color);
+	dx = ft_abs(p2.x2 - p1.x2);
+	dy = ft_abs(p2.y2 - p1.y2);
 	if (dx >= dy)
 	{
-		if (p1.x > p2.x)
+		if (p1.x2 > p2.x2)
 			swap_points(&p1, &p2);
 		grad.start = p1;
 		grad.finish = p2;
@@ -18,7 +22,7 @@ int	 print_line_img(t_mlx_data *data, t_point p1, t_point p2)
 	}
 	else
 	{
-		if (p1.y > p2.y)
+		if (p1.y2 > p2.y2)
 			swap_points(&p1, &p2);
 		grad.start = p1;
 		grad.finish = p2;
@@ -35,33 +39,34 @@ int	print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 	int y_incr;
 	int color;
 
-	// printf("(%d, %d), (%d, %d)\n", p1.x, p1.y, p2.x, p2.y);
-	dx = p2.x - p1.x;
-	dy = ft_abs(p2.y - p1.y);
-	y_incr = (p2.y >= p1.y) ? 1 : -1;
+	// printf("(%d, %d), (%d, %d)\n", p1.x2, p1.y2, p2.x2, p2.y2);
+	dx = p2.x2 - p1.x2;
+	dy = ft_abs(p2.y2 - p1.y2);
+	y_incr = (p2.y2 >= p1.y2) ? 1 : -1;
 	e = (2 * dy) + dx;
-	while (p1.x <= p2.x)
+	while (p1.x2 <= p2.x2)
 	{
 		e -= (2 * dy);
 		if (e <= 0)
 		{
-			p1.y += y_incr;
+			p1.y2 += y_incr;
 			e += (2 * dx);
 		}
-		// printf("Indice première case : %d\n", p1.x * 4 + data->size_line * p1.y);
+		// printf("Indice première case : %d\n", p1.x2 * 4 + data->size_line * p1.y2);
 		// printf("grad.start.x = %d\n", grad.start.x);
 		// printf("grad.finish.x = %d\n", grad.finish.x);
-		// printf("p1.y = %d\n", p1.y);
-		// printf("p1.x = %d\n", p1.x);
+		// printf("p1.y2 = %d\n", p1.y2);
+		// printf("p1.x2 = %d\n", p1.x2);
 		color = get_gradient(grad, p1, 1);
-		if (0 <= p1.x && p1.x < WIN_WIDTH && 0 <= p1.y && p1.y < WIN_HEIGHT)
+		if (0 <= p1.x2 && p1.x2 < WIN_WIDTH && 0 <= p1.y2 && p1.y2 < WIN_HEIGHT)
 		{
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y] = color & 0xFF;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 1] = (color >> 8) & 0xFF;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 2] = (color >> 16) & 0xFF;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 3] = 0;
+			// printf("OK\n");
+			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2] = color & 0xFF;
+			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 1] = (color >> 8) & 0xFF;
+			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 2] = (color >> 16) & 0xFF;
+			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 3] = 0;
 		}
-		p1.x++;
+		p1.x2++;
 	}
 	return (1);
 }
@@ -74,33 +79,34 @@ int	print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 	int x_incr;
 	int color;
 
-	// printf("(%d, %d), (%d, %d)\n", p1.x, p1.y, p2.x, p2.y);
-	x_incr = (p1.x <= p2.x) ? 1 : -1;
-	dx = ft_abs(p2.x - p1.x);
-	dy = p2.y - p1.y;
+	// printf("(%d, %d), (%d, %d)\n", p1.x2, p1.y2, p2.x2, p2.y2);
+	x_incr = (p1.x2 <= p2.x2) ? 1 : -1;
+	dx = ft_abs(p2.x2 - p1.x2);
+	dy = p2.y2 - p1.y2;
 	e = (2 * dx) + dy;
-	while (p1.y <= p2.y)
+	while (p1.y2 <= p2.y2)
 	{
 		e -= (2 * dx);
 		if (e <= 0)
 		{
-			p1.x += x_incr;
+			p1.x2 += x_incr;
 			e += (2 * dy);
 		}
-		// printf("Indice première case : %d\n", p1.x * 4 + data->size_line * p1.y);
+		// printf("Indice première case : %d\n", p1.x2 * 4 + data->size_line * p1.y2);
 		// printf("grad.start.y = %d\n", grad.start.y);
 		// printf("grad.fnish.y = %d\n", grad.finish.y);
-		// printf("p2.y = %d\n", p2.y);
-		// printf("p1.y = %d\n", p1.y);
+		// printf("p2.y2 = %d\n", p2.y2);
+		// printf("p1.y2 = %d\n", p1.y2);
 		color = get_gradient(grad, p1, 2);
-		if (0 <= p1.x && p1.x < WIN_WIDTH && 0 <= p1.y && p1.y < WIN_HEIGHT)
+		if (0 <= p1.x2 && p1.x2 < WIN_WIDTH && 0 <= p1.y2 && p1.y2 < WIN_HEIGHT)
 		{
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y] = color & 0xFF;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 1] = (color >> 8) & 0xFF;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 2] = (color >> 16) & 0xFF;
-			(data->img_data)[p1.x * 4 + data->size_line * p1.y + 3] = 0;
+			// printf("OK\n");
+			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2] = color & 0xFF;
+			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 1] = (color >> 8) & 0xFF;
+			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 2] = (color >> 16) & 0xFF;
+			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 3] = 0;
 		}
-		p1.y++;
+		p1.y2++;
 	}
 	return (1);
 }
@@ -109,16 +115,16 @@ void	swap_points(t_point *a, t_point *b)
 {
 	t_point tmp;
 
-	tmp.x = a->x;
-	tmp.y = a->y;
-	tmp.z = a->z;
+	tmp.x2 = a->x2;
+	tmp.y2 = a->y2;
+	tmp.z2 = a->z2;
 	tmp.color = a->color;
-	a->x = b->x;
-	a->y = b->y;
-	a->z = b->z;
+	a->x2 = b->x2;
+	a->y2 = b->y2;
+	a->z2 = b->z2;
 	a->color = b->color;
-	b->x = tmp.x;
-	b->y = tmp.y;
-	b->z = tmp.z;
+	b->x2 = tmp.x2;
+	b->y2 = tmp.y2;
+	b->z2 = tmp.z2;
 	b->color = tmp.color;
 }
