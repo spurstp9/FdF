@@ -18,7 +18,7 @@ void	ft_display(t_fdf *fdf)
 		fdf->mlx.img_ptr = mlx_new_image(fdf->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 		fdf->mlx.img_data = mlx_get_data_addr(fdf->mlx.img_ptr, &(fdf->mlx.bpp), &(fdf->mlx.size_line), &(fdf->mlx.endian));
 	}
-	change_fdf(fdf);
+	
 	draw_map(fdf);
 	display_menu(fdf);
 	mlx_hook(fdf->mlx.win_ptr, 2, 0, &key_hook, fdf);
@@ -27,45 +27,27 @@ void	ft_display(t_fdf *fdf)
 
 void	get_alt_max(t_fdf *fdf)
 {
-	int			i;
-	int			j;
-	t_map_line *line;
+	int i;
 
-	i = 0;
-	line = fdf->map.list;
-	fdf->alt_max = ((line->tab)[0]).z;
-	while (i < fdf->map.nbline)
+	i = 1;
+	fdf->alt_max = ((fdf->tab)[0]).z;
+	while (i < fdf->total)
 	{
-		j = 0;
-		while (j < fdf->map.nbcol)
-		{
-			fdf->alt_max = ft_max(fdf->alt_max, ((line->tab)[j]).z);
-			j++;
-		}
+		fdf->alt_max = ft_max(fdf->alt_max, ((fdf->tab)[i]).z);
 		i++;
-		line = line->next;
 	}
 }
 
 void	get_alt_min(t_fdf *fdf)
 {
-	int			i;
-	int			j;
-	t_map_line *line;
+	int i;
 
-	i = 0;
-	line = fdf->map.list;
-	fdf->alt_min = ((line->tab)[0]).z;
-	while (i < fdf->map.nbline)
+	i = 1;
+	fdf->alt_min = ((fdf->tab)[0]).z;
+	while (i < fdf->total)
 	{
-		j = 0;
-		while (j < fdf->map.nbcol)
-		{
-			fdf->alt_min = ft_min(fdf->alt_min, ((line->tab)[j]).z);
-			j++;
-		}
+		fdf->alt_min = ft_min(fdf->alt_max, ((fdf->tab)[i]).z);
 		i++;
-		line = line->next;
 	}
 }
 
@@ -94,25 +76,17 @@ void	display_menu(t_fdf *fdf)
 void	draw_map(t_fdf *fdf)
 {
 	int i;
-	int j;
 	t_point a;
 	t_point b;
-	t_map_line *line;
 
-	line = fdf->map.list;
 	i = -1;
-	while (++i < fdf->map.nbline)
+	while (++i < fdf->total)
 	{
-		j = -1;
-		while (++j < fdf->map.nbcol)
-		{
-			a = line->tab[j];
-			get_point_on_the_right(fdf, line, a, &b);
-			draw_segment(fdf, a, b);
-			get_point_under(fdf, line, a, &b);
-			draw_segment(fdf, a, b);
-		}
-		line = line->next;
+		a = fdf->tab[i];
+		get_point_on_the_right(fdf, i, a, &b);
+		draw_segment(fdf, a, b);
+		get_point_under(fdf, i, a, &b);
+		draw_segment(fdf, a, b);
 	}
 	mlx_put_image_to_window(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, fdf->mlx.img_ptr, 0, 0);
 }

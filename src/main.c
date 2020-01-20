@@ -23,6 +23,7 @@ int	ft_fdf(char *map_path)
 		get_alt_max(&fdf);
 		get_alt_min(&fdf);
 		change_color(&fdf);
+		change_fdf(&fdf, 5, 0);
 		ft_display(&fdf);
 	}
 	free_fdf(&fdf);
@@ -44,9 +45,10 @@ void	init_fdf(t_fdf *fdf, char proj)
 	fdf->mlx.mlx_ptr = mlx_init();
 	fdf->mlx.win_ptr = mlx_new_window(fdf->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FdF");
 	fdf->mlx.img_ptr = NULL;
-	fdf->map.nbcol = -1;
-	fdf->map.nbline = 0;
-	fdf->map.list = NULL;
+	fdf->nbcol = -1;
+	fdf->nbline = 0;
+	fdf->total = 0;
+	fdf->tab = NULL;
 	fdf->color_code = 1;
 }
 
@@ -78,4 +80,5 @@ void	reset_fdf(t_fdf *fdf, char proj)
 	fdf->x_rotation = 0.0;
 	fdf->y_rotation = 0.0;
 	fdf->z_rotation = 0.0;
+	change_fdf(fdf, 5, 0);
 }

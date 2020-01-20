@@ -38,13 +38,6 @@ typedef struct			s_point
 	int					color;
 }						t_point;
 
-typedef struct			s_map_line
-{
-	t_point				*tab;
-	struct s_map_line	*prev;
-	struct s_map_line	*next;
-}						t_map_line;
-
 typedef struct			s_mlx_data
 {
 	void				*mlx_ptr;
@@ -56,17 +49,13 @@ typedef struct			s_mlx_data
 	int					endian;
 }						t_mlx_data;
 
-typedef struct			s_map
-{
-	int					nbcol;
-	int					nbline;
-	t_map_line			*list;
-}						t_map;
-
 typedef struct			s_fdf
 {
 	t_mlx_data			mlx;
-	t_map				map;
+	int					nbcol;
+	int					nbline;
+	int					total;
+	t_point				*tab;
 	float				zoom;
 	int					altitude;
 	int					x_shift;
@@ -79,7 +68,7 @@ typedef struct			s_fdf
 	int					color_code;
 	int					alt_min;
 	int					alt_max;
-	int magn;
+	int					magn;
 }						t_fdf;
 
 typedef struct	s_gradient
@@ -88,7 +77,7 @@ typedef struct	s_gradient
 	t_point		finish;
 }				t_gradient;
 
-int		add_to_list(t_fdf *fdf, char **stock);
+int		add_to_tab(t_fdf *fdf, char **stock);
 void	apply_altitude(t_fdf *fdf, t_point *a);
 void	apply_proj(t_fdf *fdf, t_point *a);
 void	apply_rotation(t_fdf *fdf, t_point *a);
@@ -96,8 +85,9 @@ void	apply_shift(t_fdf *fdf, t_point *a);
 void	apply_zoom(t_fdf *fdf, t_point *a);
 void	cabinet(t_point *p);
 void	change_altitude(t_fdf *fdf, int keycode);
-void    change_fdf(t_fdf *fdf);
+void    change_fdf(t_fdf *fdf, char c, int keycode);
 void	change_shift(t_fdf *fdf, int keycode);
+void	change_shift_only(t_point *a, int keycode);
 void	change_rotation(t_fdf *fdf, int keycode);
 void	change_zoom(t_fdf *fdf, int keycode);
 int		check_map(int fd, t_fdf *fdf);
@@ -117,10 +107,9 @@ void	get_alt_max(t_fdf *fdf);
 void	get_alt_min(t_fdf *fdf);
 int		get_gradient(t_gradient grad, t_point current, char axe);
 int		get_gradient_mix(int start, int finish, float percent);
-int		get_data(t_fdf *fdf,t_map_line *new, char **stock);
 float	get_percentage(int start, int finish, int current);
-void	get_point_on_the_right(t_fdf *fdf, t_map_line *line, t_point a, t_point *b);
-void	get_point_under(t_fdf *fdf, t_map_line *line, t_point a, t_point *b);
+void	get_point_on_the_right(t_fdf *fdf, int index, t_point a, t_point *b);
+void	get_point_under(t_fdf *fdf, int index, t_point a, t_point *b);
 void	init_fdf(t_fdf *fdf, char proj);
 void	iso(t_point *p);
 int		key_hook(int keycode, void *param);

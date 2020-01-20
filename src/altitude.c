@@ -1,29 +1,25 @@
 #include "../inc/fdf.h"
 
-void    change_fdf(t_fdf *fdf)
+void    change_fdf(t_fdf *fdf, char c, int keycode)
 {
-    t_map_line *line;
     int i;
-    int j;
     t_point *a;
 
-    line = fdf->map.list;
     i = 0;
-    while (i < fdf->map.nbline)
+    while (i < fdf->total)
     {
-        j = 0;
-        while (j < fdf->map.nbcol)
+        a = &(fdf->tab[i]);
+        if (c != 1)
         {
-            a = &(line->tab[j]);
             apply_altitude(fdf, a);
             apply_zoom(fdf, a);
             apply_rotation(fdf, a);
             apply_proj(fdf, a);
             apply_shift(fdf, a);
-            j++;
         }
+        else
+            change_shift_only(a, keycode);
         i++;
-        line = line->next;
     }
 }
 

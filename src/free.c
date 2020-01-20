@@ -18,18 +18,8 @@ int	free_check_var(char **line, char ***stock, int len, int ret)
 
 int free_fdf(t_fdf *fdf)
 {
-	t_map_line *line;
-	t_map_line *next;
-
-	line = fdf->map.list;
-	while (line)
-	{
-		next = line->next;
-		free(line->tab);
-		free(line);
-		line = next;
-	}
-	line = NULL;
+	free(fdf->tab);
+	fdf->tab = NULL;
 	free(fdf->mlx.mlx_ptr);
 	fdf->mlx.mlx_ptr = NULL;
 	free(fdf->mlx.win_ptr);

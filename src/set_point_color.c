@@ -2,25 +2,16 @@
 
 void    change_color(t_fdf *fdf)
 {
-    t_map_line *line;
     int i;
-    int j;
     t_point *a;
 
     fdf->color = set_fdf_color(fdf);
-    line = fdf->map.list;
     i = 0;
-    while (i < fdf->map.nbline)
+    while (i < fdf->total)
     {
-        j = 0;
-        while (j < fdf->map.nbcol)
-        {
-            a = &(line->tab[j]);
-            set_point_color(fdf, a);
-            j++;
-        }
+        a = &(fdf->tab[i]);
+        set_point_color(fdf, a);
         i++;
-        line = line->next;
     }
 }
 
