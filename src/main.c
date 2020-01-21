@@ -2,10 +2,14 @@
 
 int main(int argc, char **argv)
 {
+	printf("OK");
 	if (argc != 2)
 		printf("usage: ./fdf <map>\n");
 	else
+	{
+		printf("OK");
 		ft_fdf(argv[1]);
+	}
 	return (0);
 }
 
@@ -17,9 +21,8 @@ int	ft_fdf(char *map_path)
 	if ((fd = open((const char*)map_path, O_RDONLY)) == -1)
 		return (0);
 	init_fdf(&fdf, 1);
-	if (check_map(fd, &fdf))
+	if (check_map(fd, &fdf) > -1)
 	{
-		// printf("Nombre de colonnes : %d\nNombre de lignes : %d\n", fdf.map.nbcol, fdf.map.nbline);
 		calculate_initial_zoom(&fdf);
 		get_alt_max(&fdf);
 		get_alt_min(&fdf);
@@ -55,24 +58,6 @@ void	init_fdf(t_fdf *fdf, char proj)
 	fdf->color_code = 1;
 }
 
-int		set_fdf_color(t_fdf *fdf)
-{
-	fdf->color_code %= 7;
-	if (fdf->color_code == 1)
-		return (BLUE);
-	if (fdf->color_code == 2)
-		return (GREEN);
-	if (fdf->color_code == 3)
-		return (ORANGE);
-	if (fdf->color_code == 4)
-		return (RED);
-	if (fdf->color_code == 5)
-		return (YELLOW);
-	if (fdf->color_code == 6)
-		return (WHITE);
-	return (-1);
-}
-
 void	reset_fdf(t_fdf *fdf, char proj)
 {
 	fdf->proj = proj;
@@ -89,4 +74,27 @@ void	reset_fdf(t_fdf *fdf, char proj)
 	do_calculations(fdf, 1);
 	calculate_initial_shift(fdf);
 	do_calculations(fdf, 2);
+}
+
+void    do_calculations(t_fdf *fdf, char c)
+{
+    int i;
+    t_point *a;
+
+    i = 0;
+    while (i < fdf->total)
+    {
+        a = &(fdf->tab[i]);
+        if (c == 1)
+        {
+            apply_altitude(fdf, a);
+            apply_zoom(fdf, a);
+            apply_rotation(fdf, a);
+            apply_proj(fdf, a);
+            apply_shift(fdf, a);
+        }
+        else
+            apply_only_shift(fdf, a);
+        i++;
+    }
 }

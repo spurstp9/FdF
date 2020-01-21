@@ -13,6 +13,8 @@ int	free_check_var(char **line, char ***stock, int len, int ret)
 	}
 	free(*stock);
 	*stock = NULL;
+	if (ret == -1)
+		write(1, "error\n", 6);
 	return (ret);
 }
 

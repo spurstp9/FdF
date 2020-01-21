@@ -15,6 +15,24 @@ void    change_color(t_fdf *fdf)
     }
 }
 
+int     set_fdf_color(t_fdf *fdf)
+{
+    fdf->color_code %= 7;
+    if (fdf->color_code == 1)
+        return (BLUE);
+    if (fdf->color_code == 2)
+        return (GREEN);
+    if (fdf->color_code == 3)
+        return (ORANGE);
+    if (fdf->color_code == 4)
+        return (RED);
+    if (fdf->color_code == 5)
+        return (YELLOW);
+    if (fdf->color_code == 6)
+        return (WHITE);
+    return (-1);
+}
+
 void	set_point_color(t_fdf *fdf, t_point *a)
 {
 	t_gradient grad;

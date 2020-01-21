@@ -1,28 +1,5 @@
 #include "../inc/fdf.h"
 
-void    do_calculations(t_fdf *fdf, char c)
-{
-    int i;
-    t_point *a;
-
-    i = 0;
-    while (i < fdf->total)
-    {
-        a = &(fdf->tab[i]);
-        if (c == 1)
-        {
-            apply_altitude(fdf, a);
-            apply_zoom(fdf, a);
-            apply_rotation(fdf, a);
-            apply_proj(fdf, a);
-            apply_shift(fdf, a);
-        }
-        else
-            apply_only_shift(fdf, a);
-        i++;
-    }
-}
-
 void    change_altitude(t_fdf *fdf, int keycode)
 {
     if (keycode == 13)

@@ -6,10 +6,6 @@ int	 print_line_img(t_mlx_data *data, t_point p1, t_point p2)
 	int dy;
 	t_gradient	grad;
 
-	// printf("p1.x2 = %d p1.y2 = %d p1.z2 = %d\n", p1.x2, p1.y2, p1.x2);
-	// printf("p2.x2 = %d p2.y2 = %d p2.z2 = %d\n", p2.x2, p2.y2, p2.x2);
-	// printf("Couleur : %d\n", p1.color);
-	// printf("Couleur : %d\n", p2.color);
 	dx = ft_abs(p2.x2 - p1.x2);
 	dy = ft_abs(p2.y2 - p1.y2);
 	if (dx >= dy)
@@ -39,7 +35,6 @@ int	print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 	int y_incr;
 	int color;
 
-	// printf("(%d, %d), (%d, %d)\n", p1.x2, p1.y2, p2.x2, p2.y2);
 	dx = p2.x2 - p1.x2;
 	dy = ft_abs(p2.y2 - p1.y2);
 	y_incr = (p2.y2 >= p1.y2) ? 1 : -1;
@@ -52,15 +47,9 @@ int	print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 			p1.y2 += y_incr;
 			e += (2 * dx);
 		}
-		// printf("Indice première case : %d\n", p1.x2 * 4 + data->size_line * p1.y2);
-		// printf("grad.start.x = %d\n", grad.start.x);
-		// printf("grad.finish.x = %d\n", grad.finish.x);
-		// printf("p1.y2 = %d\n", p1.y2);
-		// printf("p1.x2 = %d\n", p1.x2);
 		color = get_gradient(grad, p1, 1);
 		if (0 <= p1.x2 && p1.x2 < WIN_WIDTH && 0 <= p1.y2 && p1.y2 < WIN_HEIGHT)
 		{
-			// printf("OK\n");
 			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2] = color & 0xFF;
 			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 1] = (color >> 8) & 0xFF;
 			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 2] = (color >> 16) & 0xFF;
@@ -79,7 +68,6 @@ int	print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 	int x_incr;
 	int color;
 
-	// printf("(%d, %d), (%d, %d)\n", p1.x2, p1.y2, p2.x2, p2.y2);
 	x_incr = (p1.x2 <= p2.x2) ? 1 : -1;
 	dx = ft_abs(p2.x2 - p1.x2);
 	dy = p2.y2 - p1.y2;
@@ -92,15 +80,9 @@ int	print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 			p1.x2 += x_incr;
 			e += (2 * dy);
 		}
-		// printf("Indice première case : %d\n", p1.x2 * 4 + data->size_line * p1.y2);
-		// printf("grad.start.y = %d\n", grad.start.y);
-		// printf("grad.fnish.y = %d\n", grad.finish.y);
-		// printf("p2.y2 = %d\n", p2.y2);
-		// printf("p1.y2 = %d\n", p1.y2);
 		color = get_gradient(grad, p1, 2);
 		if (0 <= p1.x2 && p1.x2 < WIN_WIDTH && 0 <= p1.y2 && p1.y2 < WIN_HEIGHT)
 		{
-			// printf("OK\n");
 			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2] = color & 0xFF;
 			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 1] = (color >> 8) & 0xFF;
 			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 2] = (color >> 16) & 0xFF;

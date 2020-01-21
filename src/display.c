@@ -1,8 +1,5 @@
 #include "../inc/fdf.h"
 
-
-// Idée : pour chaque point A =(x, y), tracer le segment [AB] et [AC] avec B = (x + 1, y), avec C = (x, y + 1)
-
 void	draw_segment(t_fdf *fdf, t_point a, t_point b)
 {
 	if (b.x > -1)

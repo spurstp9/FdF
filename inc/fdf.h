@@ -94,6 +94,7 @@ void	change_proj(t_fdf *fdf);
 void	change_shift(t_fdf *fdf, int keycode);
 void	change_rotation(t_fdf *fdf, int keycode);
 void	change_zoom(t_fdf *fdf, int keycode);
+int		check_line(char *line);
 int		check_map(int fd, t_fdf *fdf);
 int		deal_nb_col(t_fdf *fdf, char **stock);
 void	display_menu(t_fdf *fdf);
