@@ -1,5 +1,17 @@
 #include "../inc/fdf.h"
 
+void	adjust_shift(t_fdf *fdf)
+{
+	t_point old;
+	t_point new;
+
+	old = fdf->tab[fdf->total / 2];
+	new = old;
+	apply_altitude(fdf, &new);
+    apply_zoom(fdf, &new);
+    apply_rotation(fdf, &new);
+}
+
 void	apply_shift(t_fdf *fdf, t_point *a)
 {
         a->x2 += fdf->x_shift;
