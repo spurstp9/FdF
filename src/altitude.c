@@ -6,6 +6,8 @@ void    do_calculations(t_fdf *fdf, char c)
     t_point *a;
 
     i = 0;
+    if (!fdf->init)
+        adjust_3d_shift(fdf);
     while (i < fdf->total)
     {
         a = &(fdf->tab[i]);
@@ -14,6 +16,7 @@ void    do_calculations(t_fdf *fdf, char c)
             apply_altitude(fdf, a);
             apply_zoom(fdf, a);
             apply_rotation(fdf, a);
+            apply_3d_shift(fdf, a);
             apply_proj(fdf, a);
             apply_shift(fdf, a);
         }
@@ -34,5 +37,5 @@ void    change_altitude(t_fdf *fdf, int keycode)
 
 void	apply_altitude(t_fdf *fdf, t_point *a)
 {
-	a->z2 = a->z * (fdf->altitude * fdf->zoom);
+	a->z3 = a->z * (fdf->altitude * fdf->zoom);
 }

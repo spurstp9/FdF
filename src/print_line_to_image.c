@@ -6,8 +6,8 @@ int	 print_line_img(t_mlx_data *data, t_point p1, t_point p2)
 	int dy;
 	t_gradient	grad;
 
-	// printf("p1.x2 = %d p1.y2 = %d p1.z2 = %d\n", p1.x2, p1.y2, p1.x2);
-	// printf("p2.x2 = %d p2.y2 = %d p2.z2 = %d\n", p2.x2, p2.y2, p2.x2);
+	// printf("p1.x2 = %d p1.y2 = %d p1.z3 = %d\n", p1.x2, p1.y2, p1.x2);
+	// printf("p2.x2 = %d p2.y2 = %d p2.z3 = %d\n", p2.x2, p2.y2, p2.x2);
 	// printf("Couleur : %d\n", p1.color);
 	// printf("Couleur : %d\n", p2.color);
 	dx = ft_abs(p2.x2 - p1.x2);
@@ -117,14 +117,14 @@ void	swap_points(t_point *a, t_point *b)
 
 	tmp.x2 = a->x2;
 	tmp.y2 = a->y2;
-	tmp.z2 = a->z2;
+	tmp.z3 = a->z3;
 	tmp.color = a->color;
 	a->x2 = b->x2;
 	a->y2 = b->y2;
-	a->z2 = b->z2;
+	a->z3 = b->z3;
 	a->color = b->color;
 	b->x2 = tmp.x2;
 	b->y2 = tmp.y2;
-	b->z2 = tmp.z2;
+	b->z3 = tmp.z3;
 	b->color = tmp.color;
 }

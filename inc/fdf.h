@@ -34,7 +34,9 @@ typedef struct			s_point
 	int					z;
 	int					x2;
 	int					y2;
-	int					z2;
+	int					x3;
+	int					y3;
+	int					z3;
 	int					color;
 }						t_point;
 
@@ -62,6 +64,9 @@ typedef struct			s_fdf
 	int					y_shift;
 	int					x_incr;
 	int					y_incr;
+	int					x_3d_shift;
+	int					y_3d_shift;
+	int					z_3d_shift;
 	float				x_rotation;
 	float				y_rotation;
 	float				z_rotation;
@@ -71,6 +76,7 @@ typedef struct			s_fdf
 	int					alt_min;
 	int					alt_max;
 	int					magn;
+	int					init;
 }						t_fdf;
 
 typedef struct	s_gradient
@@ -80,6 +86,8 @@ typedef struct	s_gradient
 }				t_gradient;
 
 int		add_to_tab(t_fdf *fdf, char **stock);
+void	adjust_3d_shift(t_fdf *fdf);
+void	apply_3d_shift(t_fdf *fdf, t_point *a);
 void	apply_altitude(t_fdf *fdf, t_point *a);
 void	apply_only_shift(t_fdf *fdf, t_point *a);
 void	apply_proj(t_fdf *fdf, t_point *a);

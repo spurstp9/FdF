@@ -27,6 +27,7 @@ int	ft_fdf(char *map_path)
 		do_calculations(&fdf, 1);
 		calculate_initial_shift(&fdf);
 		do_calculations(&fdf, 2);
+		fdf.init = 0;
 		ft_display(&fdf);
 	}
 	free_fdf(&fdf);
@@ -53,6 +54,7 @@ void	init_fdf(t_fdf *fdf, char proj)
 	fdf->total = 0;
 	fdf->tab = NULL;
 	fdf->color_code = 1;
+	fdf->init = 1;
 }
 
 int		set_fdf_color(t_fdf *fdf)
@@ -85,8 +87,10 @@ void	reset_fdf(t_fdf *fdf, char proj)
 	fdf->x_rotation = 0.0;
 	fdf->y_rotation = 0.0;
 	fdf->z_rotation = 0.0;
+	fdf->init = 1;
 	calculate_initial_zoom(fdf);
 	do_calculations(fdf, 1);
 	calculate_initial_shift(fdf);
 	do_calculations(fdf, 2);
+	fdf->init = 0;
 }

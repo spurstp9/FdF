@@ -1,6 +1,6 @@
 #include "../inc/fdf.h"
 
-void	adjust_shift(t_fdf *fdf)
+void	adjust_3d_shift(t_fdf *fdf)
 {
 	t_point old;
 	t_point new;
@@ -10,6 +10,16 @@ void	adjust_shift(t_fdf *fdf)
 	apply_altitude(fdf, &new);
     apply_zoom(fdf, &new);
     apply_rotation(fdf, &new);
+    fdf->x_3d_shift = (new.x3 - old.x3);
+    fdf->y_3d_shift = (new.y3 - old.y3);
+    fdf->z_3d_shift = (new.z3 - old.z3);
+}
+
+void	apply_3d_shift(t_fdf *fdf, t_point *a)
+{
+        a->x3 += fdf->x_3d_shift;
+        a->y3 += fdf->y_3d_shift;
+        a->z3 += fdf->z_3d_shift;
 }
 
 void	apply_shift(t_fdf *fdf, t_point *a)

@@ -26,33 +26,33 @@ void	apply_rotation(t_fdf *fdf, t_point *a)
 
 void	x_rotation(t_point *a, float angle)
 {
-	int old_y2;
-	int old_z2;
+	int old_y3;
+	int old_z3;
 
-	old_y2 = a->y2;
-	old_z2 = a->z2;
-	a->y2 = old_y2 * cos(angle) + old_z2 * sin(angle);
-	a->z2 = -old_y2 * sin(angle) + old_z2 * cos(angle);
+	old_y3 = a->y3;
+	old_z3 = a->z3;
+	a->y3 = old_y3 * cos(angle) + old_z3 * sin(angle) + 300 ;
+	a->z3 = -old_y3 * sin(angle) + old_z3 * cos(angle) + 300;
 }
 
 void	y_rotation(t_point *a, float angle)
 {
-	int old_x2;
-	int old_z2;
+	int old_x3;
+	int old_z3;
 
-	old_x2 = a->x2;
-	old_z2 = a->z2;
-	a->x2 = old_x2 * cos(angle) + old_z2 * sin(angle);
-	a->z2 = -old_x2 * sin(angle) + old_z2 * cos(angle);
+	old_x3 = a->x3;
+	old_z3 = a->z3;
+	a->x3 = old_x3 * cos(angle) + old_z3 * sin(angle);
+	a->z3 = -old_x3 * sin(angle) + old_z3 * cos(angle);
 }
 
 void	z_rotation(t_point *a, float angle)
 {
-	int old_x2;
-	int old_y2;
+	int old_x3;
+	int old_y3;
 
-	old_x2 = a->x2;
-	old_y2 = a->y2;
-	a->x2 = old_x2 * cos(angle) - old_y2 * sin(angle);
-	a->y2 = old_x2 * sin(angle) + old_y2 * cos(angle);
+	old_x3 = a->x3;
+	old_y3 = a->y3;
+	a->x3 = old_x3 * cos(angle) - old_y3 * sin(angle);
+	a->y3 = old_x3 * sin(angle) + old_y3 * cos(angle);
 }

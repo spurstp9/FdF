@@ -2,8 +2,8 @@
 
 void	apply_zoom(t_fdf *fdf, t_point *a)
 {
-	a->x2 = a->x * (fdf->magn * fdf->zoom);
-	a->y2 = a->y * (fdf->magn * fdf->zoom);
+	a->x3 = a->x * (fdf->magn * fdf->zoom);
+	a->y3 = a->y * (fdf->magn * fdf->zoom);
 }
 
 // void	apply_zoom(t_fdf *fdf, t_point *a)

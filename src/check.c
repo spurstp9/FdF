@@ -52,6 +52,11 @@ int	add_to_tab(t_fdf *fdf, char **stock)
 		new[start + i].x = i;
 		new[start + i].y = fdf->nbline - 1;
 		new[start + i].z = ft_atoi(stock[i]);
+		new[start + i].x2 = 0;
+		new[start + i].y2 = 0;
+		new[start + i].x3 = 0;
+		new[start + i].y3 = 0;
+		new[start + i].z3 = 0;
 		i++;
 	}
 	free(fdf->tab);
