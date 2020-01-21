@@ -1,5 +1,22 @@
 #include "../inc/fdf.h"
 
+void	change_rotation(t_fdf *fdf, int keycode)
+{
+	if (keycode == 15)
+		fdf->x_rotation -= 0.2;
+	else if (keycode == 17)
+		fdf->x_rotation += 0.2;
+	else if (keycode == 3)
+		fdf->y_rotation -= 0.2;
+	else if (keycode == 5)
+		fdf->y_rotation += 0.2;
+	else if (keycode == 9)
+		fdf->z_rotation -= 0.2;
+	else if (keycode == 11)
+		fdf->z_rotation += 0.2;
+	do_calculations(fdf, 1);
+}
+
 void	apply_rotation(t_fdf *fdf, t_point *a)
 {
 	x_rotation(a, fdf->x_rotation);

@@ -22,3 +22,16 @@ void	calculate_initial_zoom(t_fdf *fdf)
 			fdf->zoom -= 0.02;
 	}
 }
+
+void	change_zoom(t_fdf *fdf, int keycode)
+{
+	if (keycode == 24)
+		fdf->zoom += 0.02;
+	else if (keycode == 27)
+	{
+		fdf->zoom -= 0.02;
+		if (fdf->zoom < 0.02)
+			fdf->zoom = 0.02;
+	}
+	do_calculations(fdf, 1);
+}

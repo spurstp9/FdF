@@ -19,3 +19,20 @@ void    calculate_initial_shift(t_fdf *fdf)
     fdf->x_incr = fdf->x_shift;
     fdf->y_incr = fdf->y_shift;
 }
+
+void	change_shift(t_fdf *fdf, int keycode)
+{
+	fdf->x_incr = 0;
+	fdf->y_incr = 0;
+	if (keycode == 126)
+		fdf->y_incr += 10;
+	else if (keycode == 125)
+		fdf->y_incr -= 10;
+	else if (keycode == 123)
+		fdf->x_incr += 10;
+	else if (keycode == 124)
+		fdf->x_incr -= 10;
+	fdf->x_shift += fdf->x_incr;
+	fdf->y_shift += fdf->y_incr;
+	do_calculations(fdf, 2);
+}

@@ -90,6 +90,7 @@ void	cabinet(t_point *p);
 void    calculate_initial_shift(t_fdf *fdf);
 void	calculate_initial_zoom(t_fdf *fdf);
 void	change_altitude(t_fdf *fdf, int keycode);
+void	change_proj(t_fdf *fdf);
 void	change_shift(t_fdf *fdf, int keycode);
 void	change_rotation(t_fdf *fdf, int keycode);
 void	change_zoom(t_fdf *fdf, int keycode);

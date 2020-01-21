@@ -1,5 +1,15 @@
 #include "../inc/fdf.h"
 
+void	change_proj(t_fdf *fdf)
+{
+	if (fdf->proj == 1)
+		fdf->proj = 2;
+	else
+		fdf->proj = 1;
+	reset_fdf(fdf, fdf->proj);
+	do_calculations(fdf, 1);
+}
+
 void	apply_proj(t_fdf *fdf, t_point *a)
 {
 	if (fdf->proj == 1)
