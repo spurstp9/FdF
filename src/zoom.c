@@ -11,3 +11,14 @@ void	apply_zoom(t_fdf *fdf, t_point *a)
 // 	a->x2 = a->x * (30 * fdf->zoom);
 // 	a->y2 = a->y * (30 * fdf->zoom);
 // }
+
+void	calculate_initial_zoom(t_fdf *fdf)
+{
+	if (fdf->nbline > WIN_HEIGHT / 60 || 
+		fdf->nbcol > WIN_WIDTH / 60)
+	{
+		while (fdf->zoom >= 0.04 && fdf->nbline * fdf->zoom > WIN_HEIGHT / 60
+			&& fdf->nbcol * fdf->zoom > WIN_WIDTH / 60)
+			fdf->zoom -= 0.02;
+	}
+}

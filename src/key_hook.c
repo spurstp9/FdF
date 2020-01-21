@@ -6,7 +6,7 @@ void	change_altitude(t_fdf *fdf, int keycode)
 		fdf->altitude += 3;
 	else if (keycode == 1)
 		fdf->altitude -= 3;
-	change_fdf(fdf, 5, 0);
+	do_calculations(fdf, 1);
 }
 
 void	change_zoom(t_fdf *fdf, int keycode)
@@ -19,20 +19,24 @@ void	change_zoom(t_fdf *fdf, int keycode)
 		if (fdf->zoom < 0.02)
 			fdf->zoom = 0.02;
 	}
-	change_fdf(fdf, 5, 0);
+	do_calculations(fdf, 1);
 }
 
 void	change_shift(t_fdf *fdf, int keycode)
 {
+	fdf->x_incr = 0;
+	fdf->y_incr = 0;
 	if (keycode == 126)
-		fdf->y_shift += 10;
+		fdf->y_incr += 10;
 	else if (keycode == 125)
-		fdf->y_shift -= 10;
+		fdf->y_incr -= 10;
 	else if (keycode == 123)
-		fdf->x_shift += 10;
+		fdf->x_incr += 10;
 	else if (keycode == 124)
-		fdf->x_shift -= 10;
-	change_fdf(fdf, 1, keycode);
+		fdf->x_incr -= 10;
+	fdf->x_shift += fdf->x_incr;
+	fdf->y_shift += fdf->y_incr;
+	do_calculations(fdf, 2);
 }
 
 void	change_rotation(t_fdf *fdf, int keycode)
@@ -49,7 +53,7 @@ void	change_rotation(t_fdf *fdf, int keycode)
 		fdf->z_rotation -= 0.2;
 	else if (keycode == 11)
 		fdf->z_rotation += 0.2;
-	change_fdf(fdf, 5, 0);
+	do_calculations(fdf, 1);
 }
 
 int		key_hook(int keycode, void *param)
@@ -73,7 +77,7 @@ int		key_hook(int keycode, void *param)
 			((t_fdf*)param)->proj = 2;
 		else
 			((t_fdf*)param)->proj = 1;
-		change_fdf((t_fdf*)param, 5, 0);
+		reset_fdf((t_fdf*)param, ((t_fdf*)param)->proj);
 	}
 	else if (keycode == 8 && ++(((t_fdf*)param)->color_code))
 		change_color((t_fdf*)param);

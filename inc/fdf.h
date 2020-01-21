@@ -60,6 +60,8 @@ typedef struct			s_fdf
 	int					altitude;
 	int					x_shift;
 	int					y_shift;
+	int					x_incr;
+	int					y_incr;
 	float				x_rotation;
 	float				y_rotation;
 	float				z_rotation;
@@ -79,20 +81,22 @@ typedef struct	s_gradient
 
 int		add_to_tab(t_fdf *fdf, char **stock);
 void	apply_altitude(t_fdf *fdf, t_point *a);
+void	apply_only_shift(t_fdf *fdf, t_point *a);
 void	apply_proj(t_fdf *fdf, t_point *a);
 void	apply_rotation(t_fdf *fdf, t_point *a);
 void	apply_shift(t_fdf *fdf, t_point *a);
 void	apply_zoom(t_fdf *fdf, t_point *a);
 void	cabinet(t_point *p);
+void    calculate_initial_shift(t_fdf *fdf);
+void	calculate_initial_zoom(t_fdf *fdf);
 void	change_altitude(t_fdf *fdf, int keycode);
-void    change_fdf(t_fdf *fdf, char c, int keycode);
 void	change_shift(t_fdf *fdf, int keycode);
-void	change_shift_only(t_point *a, int keycode);
 void	change_rotation(t_fdf *fdf, int keycode);
 void	change_zoom(t_fdf *fdf, int keycode);
 int		check_map(int fd, t_fdf *fdf);
 int		deal_nb_col(t_fdf *fdf, char **stock);
 void	display_menu(t_fdf *fdf);
+void    do_calculations(t_fdf *fdf, char c);
 void	draw_map(t_fdf *fdf);
 void	draw_segment(t_fdf *fdf, t_point a, t_point b);
 int		free_check_var(char **line, char ***stock, int len, int ret);

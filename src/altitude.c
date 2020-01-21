@@ -1,6 +1,6 @@
 #include "../inc/fdf.h"
 
-void    change_fdf(t_fdf *fdf, char c, int keycode)
+void    do_calculations(t_fdf *fdf, char c)
 {
     int i;
     t_point *a;
@@ -9,7 +9,7 @@ void    change_fdf(t_fdf *fdf, char c, int keycode)
     while (i < fdf->total)
     {
         a = &(fdf->tab[i]);
-        if (c != 1)
+        if (c == 1)
         {
             apply_altitude(fdf, a);
             apply_zoom(fdf, a);
@@ -18,7 +18,7 @@ void    change_fdf(t_fdf *fdf, char c, int keycode)
             apply_shift(fdf, a);
         }
         else
-            change_shift_only(a, keycode);
+            apply_only_shift(fdf, a);
         i++;
     }
 }

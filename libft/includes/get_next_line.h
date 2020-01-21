@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include "libft.h"
 # include <limits.h>
-# define BUFF_SIZE 4
+# define BUFF_SIZE 1024
 
 int		get_next_line(const int fd, char **line);
 int		read_and_stock(const int fd, char **stock);

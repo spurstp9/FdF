@@ -6,14 +6,16 @@ void	apply_shift(t_fdf *fdf, t_point *a)
         a->y2 += fdf->y_shift;
 }
 
-void	change_shift_only(t_point *a, int keycode)
+void	apply_only_shift(t_fdf *fdf, t_point *a)
 {
-	if (keycode == 126)
-        a->y2 += 10;
-    else if (keycode == 125)
-        a->y2 -= 10;
-    else if (keycode == 123)
-        a->x2 += 10;
-    else if (keycode == 124)
-        a->x2 -= 10;
+        a->x2 += fdf->x_incr;
+        a->y2 += fdf->y_incr;
+}
+
+void    calculate_initial_shift(t_fdf *fdf)
+{
+    fdf->x_shift = (WIN_WIDTH - fdf->tab[fdf->total - 1].x2 - fdf->tab[0].x2) / 2;
+    fdf->y_shift = (WIN_HEIGHT - fdf->tab[fdf->total - 1].y2 - fdf->tab[0].y2) / 2;
+    fdf->x_incr = fdf->x_shift;
+    fdf->y_incr = fdf->y_shift;
 }
