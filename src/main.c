@@ -27,7 +27,7 @@ int	ft_fdf(char *map_path)
 		center(&fdf);
 		ft_display(&fdf);
 	}
-	free_fdf(&fdf);
+	free_fdf(&fdf, 0);
 	close(fd);
 	return (1);
 }

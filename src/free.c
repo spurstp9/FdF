@@ -18,7 +18,7 @@ int	free_check_var(char **line, char ***stock, int len, int ret)
 	return (ret);
 }
 
-int free_fdf(t_fdf *fdf)
+int free_fdf(t_fdf *fdf, char do_exit)
 {
 	free(fdf->tab);
 	fdf->tab = NULL;
@@ -30,5 +30,7 @@ int free_fdf(t_fdf *fdf)
 	fdf->mlx.img_ptr = NULL;
 	free(fdf->mlx.img_data);
 	fdf->mlx.img_data = NULL;
+	if (do_exit == 1)
+		exit(0);
 	return (1);
 }

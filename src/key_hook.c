@@ -3,10 +3,7 @@
 int		key_hook(int keycode, void *param)
 {
 	if (keycode == 53)
-	{
-		free_fdf((t_fdf*)param);
-		exit(0);
-	}
+		free_fdf((t_fdf*)param, 1);
 	else if (keycode == 13 || keycode == 1)
 		change_altitude((t_fdf*)param, keycode);
 	else if (keycode == 24 || keycode == 27)

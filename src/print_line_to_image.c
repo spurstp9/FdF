@@ -49,12 +49,7 @@ int	print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 		}
 		color = get_gradient(grad, p1, 1);
 		if (0 <= p1.x2 && p1.x2 < WIN_WIDTH && 0 <= p1.y2 && p1.y2 < WIN_HEIGHT)
-		{
-			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2] = color & 0xFF;
-			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 1] = (color >> 8) & 0xFF;
-			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 2] = (color >> 16) & 0xFF;
-			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 3] = 0;
-		}
+			fill_img_data(data, p1, color);
 		p1.x2++;
 	}
 	return (1);
@@ -82,15 +77,18 @@ int	print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 		}
 		color = get_gradient(grad, p1, 2);
 		if (0 <= p1.x2 && p1.x2 < WIN_WIDTH && 0 <= p1.y2 && p1.y2 < WIN_HEIGHT)
-		{
-			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2] = color & 0xFF;
-			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 1] = (color >> 8) & 0xFF;
-			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 2] = (color >> 16) & 0xFF;
-			(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 3] = 0;
-		}
+			fill_img_data(data, p1, color);
 		p1.y2++;
 	}
 	return (1);
+}
+
+void	fill_img_data(t_mlx_data *data, t_point p1, int color)
+{
+	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2] = color & 0xFF;
+	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 1] = (color >> 8) & 0xFF;
+	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 2] = (color >> 16) & 0xFF;
+	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 3] = 0;
 }
 
 void	swap_points(t_point *a, t_point *b)

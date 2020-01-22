@@ -111,19 +111,3 @@ int	deal_nb_col(t_fdf *fdf, char **stock)
 	}
 	return ((res == fdf->nbcol));
 }
-
-void print_tab(t_fdf *fdf)
-{
-	int i;
-
-	i = 0;
-	while (i < fdf->total)
-	{
-		printf("%d,%d  ", fdf->tab[i].z, fdf->tab[i].color);
-		if (fdf->tab[i].z < 10)
-				printf(" ");
-		if ((i + 1) % fdf->nbcol == 0)
-			printf("\n");
-		i++;
-	}
-}
