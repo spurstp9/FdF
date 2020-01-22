@@ -71,6 +71,7 @@ typedef struct			s_fdf
 	int					alt_min;
 	int					alt_max;
 	int					magn;
+	char				display_menu;
 }						t_fdf;
 
 typedef struct	s_gradient
@@ -87,14 +88,14 @@ void	apply_rotation(t_fdf *fdf, t_point *a);
 void	apply_shift(t_fdf *fdf, t_point *a);
 void	apply_zoom(t_fdf *fdf, t_point *a);
 void	cabinet(t_point *p);
-void    calculate_initial_shift(t_fdf *fdf);
 void	calculate_initial_zoom(t_fdf *fdf);
+void	center(t_fdf *fdf);
 void	change_altitude(t_fdf *fdf, int keycode);
 void	change_proj(t_fdf *fdf);
 void	change_shift(t_fdf *fdf, int keycode);
 void	change_rotation(t_fdf *fdf, int keycode);
 void	change_zoom(t_fdf *fdf, int keycode);
-int		check_line(char *line);
+int		check_line(char **stock);
 int		check_map(int fd, t_fdf *fdf);
 int		deal_nb_col(t_fdf *fdf, char **stock);
 void	display_menu(t_fdf *fdf);

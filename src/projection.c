@@ -7,7 +7,7 @@ void	change_proj(t_fdf *fdf)
 	else
 		fdf->proj = 1;
 	reset_fdf(fdf, fdf->proj);
-	do_calculations(fdf, 1);
+	// do_calculations(fdf, 1);
 }
 
 void	apply_proj(t_fdf *fdf, t_point *a)

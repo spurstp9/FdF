@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "includes/get_next_line.h"
 
 int	free_and_return(char *str, int ret)
 {
@@ -29,6 +29,8 @@ int	read_and_stock(const int fd, char **stock)
 	while ((ret = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[ret] = '\0';
+		if ((int)ft_strlen(buffer) != ret)
+			return (free_and_return(buffer, -1));
 		if (!*stock && !(*stock = ft_strdup("")))
 			return (free_and_return(buffer, -1));
 		tmp = *stock;

@@ -3,17 +3,17 @@
 void	change_rotation(t_fdf *fdf, int keycode)
 {
 	if (keycode == 15)
-		fdf->x_rotation -= 0.2;
+		fdf->x_rotation -= 0.261799;
 	else if (keycode == 17)
-		fdf->x_rotation += 0.2;
+		fdf->x_rotation += 0.261799;
 	else if (keycode == 3)
-		fdf->y_rotation -= 0.2;
+		fdf->y_rotation -= 0.261799;
 	else if (keycode == 5)
-		fdf->y_rotation += 0.2;
+		fdf->y_rotation += 0.261799;
 	else if (keycode == 9)
-		fdf->z_rotation -= 0.2;
+		fdf->z_rotation -= 0.261799;
 	else if (keycode == 11)
-		fdf->z_rotation += 0.2;
+		fdf->z_rotation += 0.261799;
 	do_calculations(fdf, 1);
 }
 

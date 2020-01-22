@@ -17,11 +17,15 @@ int		key_hook(int keycode, void *param)
 		reset_fdf((t_fdf*)param, ((t_fdf*)param)->proj);
 	else if (keycode == 7)
 		change_proj((t_fdf*)param);
-	else if (keycode == 8 && ++(((t_fdf*)param)->color_code))
+	else if (keycode == 19 && ++(((t_fdf*)param)->color_code))
 		change_color((t_fdf*)param);
+	else if (keycode == 18)
+		((t_fdf*)param)->display_menu = ((t_fdf*)param)->display_menu == 1 ? 0 : 1;
 	else if (keycode == 15 || keycode == 17 || keycode == 3 || keycode == 5
 		|| keycode == 9 || keycode == 11)
 		change_rotation((t_fdf*)param, keycode);
+	else if (keycode == 8)
+		center((t_fdf*)param);
 	ft_display((t_fdf*)param);
 	return (1);
 }

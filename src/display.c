@@ -50,24 +50,30 @@ void	get_alt_min(t_fdf *fdf)
 
 void	display_menu(t_fdf *fdf)
 {
-	mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 10, 0xFDEE00,
-		"----- LIST OF COMMANDS -----");
-	mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 50, 0xFDEE00,
-		"Zoom out: -");
-	mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 70, 0xFDEE00,
-		"Zoom in: +");
-	mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 90, 0xFDEE00,
-		"Lower altitude: down arrow");
-	mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 110, 0xFDEE00,
-		"Increase altitude: up arrow");
-	mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 130, 0xFDEE00,
-		"Move up/down/left/right: W/S/A/D");
-	mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 150, 0xFDEE00,
-		"Change projection: X");
-	mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 170, 0xFDEE00,
-		"Reset projection: Z");
-	mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 190, 0xFDEE00,
-		"Exit program: ESC");
+	if (fdf->display_menu)
+	{
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 10, 0xFDEE00,
+		"----- LIST OF COMMANDS (hide: 1) -----");
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 40, 0xFDEE00,
+			"Zoom out/in: -/+");
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 60, 0xFDEE00,
+			"Lower/increase altitude: W/S");
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 80, 0xFDEE00,
+			"Move camera: up/down/left/right arrow");
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 100, 0xFDEE00,
+			"Center: C");
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 120, 0xFDEE00,
+			"X/Y/Z axis rotation: R-T/F-G/V-B");
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 140, 0xFDEE00,
+			"Change color: 2");
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 160, 0xFDEE00,
+			"Change/reset projection: X/Z");
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 180, 0xFDEE00,
+			"Exit: ESC");
+	}
+	else
+		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 10, 0xFDEE00,
+		"----- LIST OF COMMANDS (show: 1) -----");
 }
 
 void	draw_map(t_fdf *fdf)

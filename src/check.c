@@ -12,11 +12,11 @@ int	check_map(int fd, t_fdf *fdf)
 	stock = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if (!check_line(line))
-			return (free_check_var(&line, &stock, fdf->nbcol, -1));
 		if (!split_line(&line, &tmp, &stock))
 			return (free_check_var(&line, &stock, fdf->nbcol, -1));
 		if (!deal_nb_col(fdf, stock))
+			return (free_check_var(&line, &stock, fdf->nbcol, -1));
+		if (!check_line(stock))
 			return (free_check_var(&line, &stock, fdf->nbcol, -1));
 		if (!add_to_tab(fdf, stock))
 			return (free_check_var(&line, &stock, fdf->nbcol, -1));
@@ -24,17 +24,24 @@ int	check_map(int fd, t_fdf *fdf)
 	return (free_check_var(&line, &stock, fdf->nbcol, ret));
 }
 
-int	check_line(char *line)
+int	check_line(char **stock)
 {
-	if (!line)
-		return (0);
-	while (*line)
+	int i;
+	int j;
+
+	i = 0;
+	while (stock[i])
 	{
-		if (*line != '-' && *line != '+' && !ft_isdigit(*line))
-			return (0);
-		if ((*line == '-' || *line == '+') && (!*(line + 1) || !ft_isdigit(*(line + 1))))
-			return (0);
-		line++;
+		j = 0;
+		while (stock[i][j])
+		{
+			if (stock[i][j] != '-' && stock[i][j] != '+' && !ft_isdigit(stock[i][j]))
+				return (0);
+			if ((stock[i][j] == '-' || stock[i][j] == '+') && (!stock[i][j + 1] || !ft_isdigit(stock[i][j + 1])))
+				return (0);
+			j++;
+		}
+		i++;
 	}
 	return (1);
 }

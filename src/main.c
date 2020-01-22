@@ -2,14 +2,10 @@
 
 int main(int argc, char **argv)
 {
-	printf("OK");
 	if (argc != 2)
 		printf("usage: ./fdf <map>\n");
 	else
-	{
-		printf("OK");
 		ft_fdf(argv[1]);
-	}
 	return (0);
 }
 
@@ -28,8 +24,7 @@ int	ft_fdf(char *map_path)
 		get_alt_min(&fdf);
 		change_color(&fdf);
 		do_calculations(&fdf, 1);
-		calculate_initial_shift(&fdf);
-		do_calculations(&fdf, 2);
+		center(&fdf);
 		ft_display(&fdf);
 	}
 	free_fdf(&fdf);
@@ -45,6 +40,8 @@ void	init_fdf(t_fdf *fdf, char proj)
 	fdf->altitude = 0;
 	fdf->x_shift = 0;
 	fdf->y_shift = 0;
+	fdf->x_incr = 0;
+	fdf->y_incr = 0;
 	fdf->x_rotation = 0.0;
 	fdf->y_rotation = 0.0;
 	fdf->z_rotation = 0.0;
@@ -56,6 +53,7 @@ void	init_fdf(t_fdf *fdf, char proj)
 	fdf->total = 0;
 	fdf->tab = NULL;
 	fdf->color_code = 1;
+	fdf->display_menu = 1;
 }
 
 void	reset_fdf(t_fdf *fdf, char proj)
@@ -72,8 +70,7 @@ void	reset_fdf(t_fdf *fdf, char proj)
 	fdf->z_rotation = 0.0;
 	calculate_initial_zoom(fdf);
 	do_calculations(fdf, 1);
-	calculate_initial_shift(fdf);
-	do_calculations(fdf, 2);
+	center(fdf);
 }
 
 void    do_calculations(t_fdf *fdf, char c)
