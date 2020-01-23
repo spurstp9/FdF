@@ -50,6 +50,8 @@ int	split_line(char **line, char ***stock)
 {
 	if (!(*stock = ft_split(*line, " ")))
 		return (0);
+	if (!((*stock)[0]))
+		return (0);
 	return (1);
 }
 
