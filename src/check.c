@@ -3,17 +3,15 @@
 int	check_map(int fd, t_fdf *fdf)
 {
 	char *line;
-	char *tmp;
 	char **stock;
 	int	ret;
 
 	line = NULL;
-	tmp = NULL;
 	stock = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		fdf->nbline++;
-		if (!split_line(&line, &tmp, &stock))
+		if (!split_line(&line, &stock))
 			return (free_check_var(&line, &stock, fdf, -1));
 		if (!deal_nb_col(fdf, stock))
 			return (free_check_var(&line, &stock, fdf, -1));
@@ -48,12 +46,8 @@ int	check_line(char **stock)
 	return (1);
 }
 
-int	split_line(char **line, char **tmp, char ***stock)
+int	split_line(char **line, char ***stock)
 {
-	*tmp = *line;
-	if (!(*line = ft_strtrim(*line)))
-		return (0);
-	ft_strdel(tmp);
 	if (!(*stock = ft_split(*line, " ")))
 		return (0);
 	return (1);

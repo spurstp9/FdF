@@ -129,7 +129,7 @@ void	reset_fdf(t_fdf *fdf, char proj);
 int		set_fdf_color(t_fdf *fdf);
 void	set_point_color(t_fdf *fdf, t_point *a);
 void    change_color(t_fdf *fdf);
-int		split_line(char **line, char **tmp, char ***stock);
+int		split_line(char **line, char ***stock);
 void	swap_points(t_point *a, t_point *b);
 void	x_rotation(t_point *a, float angle);
 void	y_rotation(t_point *a, float angle);

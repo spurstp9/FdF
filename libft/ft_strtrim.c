@@ -23,11 +23,11 @@ char		*ft_strtrim(char const *s)
 	if (!s)
 		return (NULL);
 	i = 0;
-	while (s[i] && s[i] == ' ')
+	while (s[i] && (s[i] == ' ' || s[i] == '\t' || s[i] == '\n'))
 		i++;
 	start = i;
 	i = (int)ft_strlen(s) - 1;
-	while (i >= 0 && s[i] == ' ')
+	while (i >= 0 && (s[i] == ' ' || s[i] == '\t' || s[i] == '\n'))
 		i--;
 	end = i;
 	if (!(new = (char*)malloc(sizeof(char) * (end - start + 2))))
