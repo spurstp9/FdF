@@ -13,67 +13,31 @@
 #include "includes/libft.h"
 #include <stdlib.h>
 
-static void	get_ws_count(char const *s, int *start, int *end)
-{
-	int i;
-
-	if (!s[0])
-	{
-		*start = 0;
-		*end = 0;
-	}
-	else
-	{
-		i = 0;
-		while (s[i] && (s[i] == ' ' || s[i] == '\n' || s[i] == '\t'))
-			i++;
-		*start = i;
-		if (!s[i])
-			*start = *end;
-		else
-		{
-			i = (int)ft_strlen(s) - 1;
-			while (i > *start && (s[i] == ' ' || s[i] == '\n' || s[i] == '\t'))
-				i--;
-			*end = i;
-		}
-	}
-}
-
-static void	fill_new_str(char const *s, char *new, int start, int end)
-{
-	int i;
-
-	i = start;
-	while (i <= end)
-	{
-		new[i - start] = s[i];
-		i++;
-	}
-	new[end - start + 1] = '\0';
-}
-
 char		*ft_strtrim(char const *s)
 {
-	char	*new;
-	int		start;
-	int		end;
+	int i;
+	int start;
+	int end;
+	char *new;
 
 	if (!s)
 		return (NULL);
-	get_ws_count(s, &start, &end);
-	if (start == end)
-	{
-		if ((new = (char*)malloc(sizeof(char))) == NULL)
+	i = 0;
+	while (s[i] && s[i] == ' ')
+		i++;
+	start = i;
+	i = (int)ft_strlen(s) - 1;
+	while (i >= 0 && s[i] == ' ')
+		i--;
+	end = i;
+	if (!(new = (char*)malloc(sizeof(char) * (end - start + 2))))
 			return (NULL);
-		new[0] = '\0';
-	}
-	else
+	i = 0;
+	while (i < end - start + 1)
 	{
-		if ((new = (char*)malloc(sizeof(char)
-								* (size_t)(end - start + 2))) == NULL)
-			return (NULL);
-		fill_new_str(s, new, start, end);
+		new[i] = s[start + i];
+		i++;
 	}
+	new[i] = '\0';
 	return (new);
 }

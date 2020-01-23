@@ -25,21 +25,21 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@ar -rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
+	ar -rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 %.o:%.c $(HDR)
-	@$(CC) $(CFLAGS) -I$(HDR_FOLDER) -c -o $@ $<
+	$(CC) $(CFLAGS) -I$(HDR_FOLDER) -c -o $@ $<
 
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	$(MAKE) fclean
+	$(MAKE) all
 
 .PHONY: all clean fclean re
