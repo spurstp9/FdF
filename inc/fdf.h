@@ -103,7 +103,7 @@ void    do_calculations(t_fdf *fdf, char c);
 void	draw_map(t_fdf *fdf);
 void	draw_segment(t_fdf *fdf, t_point a, t_point b);
 void	fill_img_data(t_mlx_data *data, t_point p1, int color);
-int		free_check_var(char **line, char ***stock, int len, int ret);
+int		free_check_var(char **line, char ***stock, t_fdf *fdf, int ret);
 int		free_fdf(t_fdf *fdf, char do_exit);
 void	ft_display(t_fdf *fdf);
 int		ft_fdf(char *map_path);

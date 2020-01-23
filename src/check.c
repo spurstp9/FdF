@@ -12,16 +12,18 @@ int	check_map(int fd, t_fdf *fdf)
 	stock = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
+		fdf->nbline++;
 		if (!split_line(&line, &tmp, &stock))
-			return (free_check_var(&line, &stock, fdf->nbcol, -1));
+			return (free_check_var(&line, &stock, fdf, -1));
 		if (!deal_nb_col(fdf, stock))
-			return (free_check_var(&line, &stock, fdf->nbcol, -1));
+			return (free_check_var(&line, &stock, fdf, -1));
+		fdf->total += fdf->nbcol;
 		if (!check_line(stock))
-			return (free_check_var(&line, &stock, fdf->nbcol, -1));
+			return (free_check_var(&line, &stock, fdf, -1));
 		if (!add_to_tab(fdf, stock))
-			return (free_check_var(&line, &stock, fdf->nbcol, -1));
+			return (free_check_var(&line, &stock, fdf, -1));
 	}
-	return (free_check_var(&line, &stock, fdf->nbcol, ret));
+	return (free_check_var(&line, &stock, fdf, ret));
 }
 
 int	check_line(char **stock)
@@ -63,8 +65,6 @@ int	add_to_tab(t_fdf *fdf, char **stock)
 	int i;
 	int start;
 
-	fdf->nbline++;
-	fdf->total += fdf->nbcol;
 	i = 0;
 	start = fdf->nbcol * (fdf->nbline - 1);
 	if (!(new = (t_point*)malloc(sizeof(t_point) * fdf->nbcol * fdf->nbline)))

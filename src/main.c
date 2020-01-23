@@ -17,7 +17,7 @@ int	ft_fdf(char *map_path)
 	if ((fd = open((const char*)map_path, O_RDONLY)) == -1)
 		return (0);
 	init_fdf(&fdf, 1);
-	if (check_map(fd, &fdf) > -1)
+	if (check_map(fd, &fdf) > -1 && fdf.nbline > 0)
 	{
 		calculate_initial_zoom(&fdf);
 		get_alt_max(&fdf);
@@ -37,7 +37,7 @@ void	init_fdf(t_fdf *fdf, char proj)
 	fdf->proj = proj;
 	fdf->zoom = 1;
 	fdf->magn = 30;
-	fdf->altitude = 0;
+	fdf->altitude = 3;
 	fdf->x_shift = 0;
 	fdf->y_shift = 0;
 	fdf->x_incr = 0;
@@ -60,7 +60,7 @@ void	reset_fdf(t_fdf *fdf, char proj)
 {
 	fdf->proj = proj;
 	fdf->zoom = 1;
-	fdf->altitude = 0;
+	fdf->altitude = 3;
 	fdf->x_shift = 0;
 	fdf->y_shift = 0;
 	fdf->x_incr = 0;

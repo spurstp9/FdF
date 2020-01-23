@@ -1,20 +1,20 @@
 #include "../inc/fdf.h"
 
-int	free_check_var(char **line, char ***stock, int len, int ret)
+int	free_check_var(char **line, char ***stock, t_fdf *fdf, int ret)
 {
 	int i;
 
 	ft_strdel(line);
 	i = 0;
-	while (i < len)
+	while (i < fdf->nbcol)
 	{
 		ft_strdel(&(*stock)[i]);
 		i++;
 	}
 	free(*stock);
 	*stock = NULL;
-	if (ret == -1)
-		write(1, "error\n", 6);
+	if (ret == -1 || !fdf->nbline)
+		write(1, "No data found.\n", 15);
 	return (ret);
 }
 

@@ -35,7 +35,7 @@ void	get_alt_min(t_fdf *fdf)
 	fdf->alt_min = ((fdf->tab)[0]).z;
 	while (i < fdf->total)
 	{
-		fdf->alt_min = ft_min(fdf->alt_max, ((fdf->tab)[i]).z);
+		fdf->alt_min = ft_min(fdf->alt_min, ((fdf->tab)[i]).z);
 		i++;
 	}
 }
