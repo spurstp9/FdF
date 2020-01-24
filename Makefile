@@ -9,7 +9,7 @@ MLX_INC = -I/usr/X11/include
 MLX_FLAGS = -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
 
 SRC_FOLDER = ./src/
-SRC_FILES = altitude.c check.c color.c color2.c display.c draw_utils.c free.c gradient.c key_hook.c main.c print_line_to_image.c projection.c rotation.c shift.c zoom.c
+SRC_FILES = altitude.c center.c check.c color.c color2.c display.c draw_utils.c free.c gradient.c key_hook.c main.c print_line_to_image.c projection.c rotation.c shift.c zoom.c
 SRC = $(addprefix $(SRC_FOLDER), $(SRC_FILES))
 
 OBJ_FOLDER = ./obj/
