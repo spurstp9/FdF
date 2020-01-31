@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/28 11:33:36 by agardina          #+#    #+#             */
+/*   Updated: 2020/01/29 11:03:13 by agardina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 
 # define FDF_H
-# define WIN_HEIGHT 738
-# define WIN_WIDTH 1268
+# define WIN_HEIGHT 1200
+# define WIN_WIDTH 1800
 # define AQUA_MARINE 0x7FFFD4
 # define BEIGE 0xF5F5DC
 # define BLUE 0x0000CD
@@ -22,10 +34,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
-# include "../libft/includes/get_next_line.h"
 
 typedef struct			s_point
 {
@@ -78,67 +88,73 @@ typedef struct			s_fdf
 	char				display_menu;
 }						t_fdf;
 
-typedef struct	s_gradient
+typedef struct			s_gradient
 {
-	t_point		start;
-	t_point		finish;
-}				t_gradient;
+	t_point				start;
+	t_point				finish;
+}						t_gradient;
 
-int		add_to_tab(t_fdf *fdf, char **stock);
-void	apply_altitude(t_fdf *fdf, t_point *a);
-void	apply_only_shift(t_fdf *fdf, t_point *a);
-void	apply_proj(t_fdf *fdf, t_point *a);
-void	apply_rotation(t_fdf *fdf, t_point *a);
-void	apply_shift(t_fdf *fdf, t_point *a);
-void	apply_zoom(t_fdf *fdf, t_point *a);
-void	cabinet(t_point *p);
-void	calc_edge_coord(t_fdf *fdf, int index);
-void	calculate_initial_zoom(t_fdf *fdf);
-void	center(t_fdf *fdf);
-void	change_altitude(t_fdf *fdf, int keycode);
-void	change_proj(t_fdf *fdf);
-void	change_shift(t_fdf *fdf, int keycode);
-void	change_rotation(t_fdf *fdf, int keycode);
-void	change_zoom(t_fdf *fdf, int keycode);
-int		check_line(char **stock);
-int		check_map(int fd, t_fdf *fdf);
-int		deal_nb_col(t_fdf *fdf, char **stock);
-void	display_menu(t_fdf *fdf);
-void    do_calculations(t_fdf *fdf, char c);
-void	draw_map(t_fdf *fdf);
-void	draw_segment(t_fdf *fdf, t_point a, t_point b);
-void	fill_img_data(t_mlx_data *data, t_point p1, int color);
-int		free_check_var(char **line, char ***stock, t_fdf *fdf, int ret);
-int		free_fdf(t_fdf *fdf, char do_exit);
-void	ft_display(t_fdf *fdf);
-int		ft_fdf(char *map_path);
-int		geo_mode_alt(int z, char a);
-int		geo_mode_alt2(int z, char a);
-int		geo_mode_color(int z);
-int		geo_mode_color2(int z);
-void	get_alt_max(t_fdf *fdf);
-void	get_alt_min(t_fdf *fdf);
-void	get_edge_coord(t_fdf *fdf);
-int		get_gradient(t_gradient grad, t_point current, char axe);
-int		get_gradient_mix(int start, int finish, float percent);
-float	get_percentage(int start, int finish, int current);
-void	get_point_on_the_right(t_fdf *fdf, int index, t_point a, t_point *b);
-void	get_point_under(t_fdf *fdf, int index, t_point a, t_point *b);
-void	init_fdf(t_fdf *fdf, char proj);
-void	iso(t_point *p);
-int		key_hook(int keycode, void *param);
-int		print_line_img(t_mlx_data *data, t_point p1, t_point p2);
-int		print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2, t_gradient grad);
-int		print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2, t_gradient grad);
-void	reset_fdf(t_fdf *fdf, char proj);
-// void	set_color(t_fdf *fdf, t_point *p);
-int		set_fdf_color(t_fdf *fdf);
-void	set_point_color(t_fdf *fdf, t_point *a);
-void    change_color(t_fdf *fdf);
-int		split_line(char **line, char ***stock);
-void	swap_points(t_point *a, t_point *b);
-void	x_rotation(t_point *a, float angle);
-void	y_rotation(t_point *a, float angle);
-void	z_rotation(t_point *a, float angle);
+int						add_to_tab(t_fdf *fdf, char **stock);
+void					apply_altitude(t_fdf *fdf, t_point *a);
+void					apply_only_shift(t_fdf *fdf, t_point *a);
+void					apply_proj(t_fdf *fdf, t_point *a);
+void					apply_rotation(t_fdf *fdf, t_point *a);
+void					apply_shift(t_fdf *fdf, t_point *a);
+void					apply_zoom(t_fdf *fdf, t_point *a);
+void					cabinet(t_point *p);
+void					calc_edge_coord(t_fdf *fdf, int index);
+void					calculate_initial_zoom(t_fdf *fdf);
+void					center(t_fdf *fdf);
+void					change_altitude(t_fdf *fdf, int keycode);
+void					change_proj(t_fdf *fdf);
+void					change_shift(t_fdf *fdf, int keycode);
+void					change_rotation(t_fdf *fdf, int keycode);
+void					change_zoom(t_fdf *fdf, int keycode);
+int						check_map(int fd, t_fdf *fdf);
+int						deal_nb_col(t_fdf *fdf, char **stock);
+void					display_menu(t_fdf *fdf);
+void					do_calculations(t_fdf *fdf, char c);
+void					draw_map(t_fdf *fdf);
+void					draw_segment(t_fdf *fdf, t_point a, t_point b);
+void					fill_img_data(t_mlx_data *data, t_point p1, int color);
+int						free_and_put_error(char **line, char ***stock,
+		t_fdf *fdf, int ret);
+int						free_check_var(char **line, char ***stock);
+int						free_fdf(t_fdf *fdf, char do_exit);
+void					ft_display(t_fdf *fdf);
+int						ft_fdf(int fd);
+int						geo_mode_alt(int z, char a);
+int						geo_mode_alt2(int z, char a);
+int						geo_mode_color(int z);
+int						geo_mode_color2(int z);
+void					get_alt_max(t_fdf *fdf);
+void					get_alt_min(t_fdf *fdf);
+void					get_edge_coord(t_fdf *fdf);
+int						get_gradient(t_gradient grad, t_point current,
+		char axe);
+int						get_gradient_mix(int start, int finish, float percent);
+float					get_percentage(int start, int finish, int current);
+void					get_point_on_the_right(t_fdf *fdf, int index, t_point a,
+		t_point *b);
+void					get_point_under(t_fdf *fdf, int index, t_point a,
+		t_point *b);
+void					init_fdf(t_fdf *fdf, char proj);
+void					iso(t_point *p);
+int						key_hook(int keycode, void *param);
+int						print_line_img(t_mlx_data *data, t_point p1,
+		t_point p2);
+int						print_line_img_case1(t_mlx_data *data, t_point p1,
+		t_point p2, t_gradient grad);
+int						print_line_img_case2(t_mlx_data *data, t_point p1,
+		t_point p2, t_gradient grad);
+void					reset_fdf(t_fdf *fdf, char proj);
+int						set_fdf_color(t_fdf *fdf);
+void					set_point_color(t_fdf *fdf, t_point *a);
+void					change_color(t_fdf *fdf);
+int						split_line(char **line, char ***stock);
+void					swap_points(t_point *a, t_point *b);
+void					x_rotation(t_fdf *fdf, t_point *a);
+void					y_rotation(t_fdf *fdf, t_point *a);
+void					z_rotation(t_fdf *fdf, t_point *a);
 
 #endif

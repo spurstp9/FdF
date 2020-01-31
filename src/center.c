@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   center.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/28 11:46:35 by agardina          #+#    #+#             */
+/*   Updated: 2020/01/28 11:46:39 by agardina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
 void	get_edge_coord(t_fdf *fdf)
 {
 	int i;
 
-    i = 0;
-    while (i < fdf->total)
-    {
-        calc_edge_coord(fdf, i);
-        i++;
-    }
+	i = 0;
+	while (i < fdf->total)
+	{
+		calc_edge_coord(fdf, i);
+		i++;
+	}
 }
 
 void	calc_edge_coord(t_fdf *fdf, int index)

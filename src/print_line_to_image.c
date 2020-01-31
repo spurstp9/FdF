@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_line_to_image.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/28 11:48:24 by agardina          #+#    #+#             */
+/*   Updated: 2020/01/28 12:06:46 by agardina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
-int	 print_line_img(t_mlx_data *data, t_point p1, t_point p2)
+int		print_line_img(t_mlx_data *data, t_point p1, t_point p2)
 {
-	int dx;
-	int dy;
+	int			dx;
+	int			dy;
 	t_gradient	grad;
 
 	dx = ft_abs(p2.x2 - p1.x2);
@@ -27,13 +39,14 @@ int	 print_line_img(t_mlx_data *data, t_point p1, t_point p2)
 	return (1);
 }
 
-int	print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2, t_gradient grad)
+int		print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2,
+		t_gradient grad)
 {
-	int e;
-	int dx;
-	int dy;
-	int y_incr;
-	int color;
+	int	e;
+	int	dx;
+	int	dy;
+	int	y_incr;
+	int	color;
 
 	dx = p2.x2 - p1.x2;
 	dy = ft_abs(p2.y2 - p1.y2);
@@ -55,13 +68,14 @@ int	print_line_img_case1(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 	return (1);
 }
 
-int	print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2, t_gradient grad)
+int		print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2,
+		t_gradient grad)
 {
-	int dx;
-	int dy;
-	int e;
-	int x_incr;
-	int color;
+	int	dx;
+	int	dy;
+	int	e;
+	int	x_incr;
+	int	color;
 
 	x_incr = (p1.x2 <= p2.x2) ? 1 : -1;
 	dx = ft_abs(p2.x2 - p1.x2);
@@ -86,14 +100,16 @@ int	print_line_img_case2(t_mlx_data *data, t_point p1, t_point p2, t_gradient gr
 void	fill_img_data(t_mlx_data *data, t_point p1, int color)
 {
 	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2] = color & 0xFF;
-	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 1] = (color >> 8) & 0xFF;
-	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 2] = (color >> 16) & 0xFF;
+	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 1] =
+		(color >> 8) & 0xFF;
+	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 2] =
+		(color >> 16) & 0xFF;
 	(data->img_data)[p1.x2 * 4 + data->size_line * p1.y2 + 3] = 0;
 }
 
 void	swap_points(t_point *a, t_point *b)
 {
-	t_point tmp;
+	t_point	tmp;
 
 	tmp.x2 = a->x2;
 	tmp.y2 = a->y2;

@@ -6,13 +6,14 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 15:47:18 by agardina          #+#    #+#             */
-/*   Updated: 2019/09/02 10:48:35 by agardina         ###   ########.fr       */
+/*   Updated: 2020/01/28 16:40:43 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include "get_next_line.h"
 
 typedef struct		s_list
 {

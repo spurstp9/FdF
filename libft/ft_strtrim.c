@@ -6,7 +6,7 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 20:42:50 by agardina          #+#    #+#             */
-/*   Updated: 2019/04/24 14:01:11 by agardina         ###   ########.fr       */
+/*   Updated: 2020/01/28 11:45:34 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 char		*ft_strtrim(char const *s)
 {
-	int i;
-	int start;
-	int end;
-	char *new;
+	int		i;
+	int		start;
+	int		end;
+	char	*new;
 
 	if (!s)
 		return (NULL);
@@ -31,7 +31,7 @@ char		*ft_strtrim(char const *s)
 		i--;
 	end = i;
 	if (!(new = (char*)malloc(sizeof(char) * (end - start + 2))))
-			return (NULL);
+		return (NULL);
 	i = 0;
 	while (i < end - start + 1)
 	{

@@ -4,9 +4,9 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-MLX_INC = -I/usr/X11/include
+MLX_INC = -I/usr/local/include
 
-MLX_FLAGS = -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
+MLX_FLAGS = -g -L /usr/local/lib -l mlx -framework OpenGL -framework AppKit
 
 SRC_FOLDER = ./src/
 SRC_FILES = altitude.c center.c check.c color.c color2.c display.c draw_utils.c free.c gradient.c key_hook.c main.c print_line_to_image.c projection.c rotation.c shift.c zoom.c

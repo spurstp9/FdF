@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/28 11:46:45 by agardina          #+#    #+#             */
+/*   Updated: 2020/01/28 12:04:36 by agardina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
 int	check_map(int fd, t_fdf *fdf)
 {
-	char *line;
-	char **stock;
-	int	ret;
+	char	*line;
+	char	**stock;
+	int		ret;
 
 	line = NULL;
 	stock = NULL;
@@ -12,38 +24,15 @@ int	check_map(int fd, t_fdf *fdf)
 	{
 		fdf->nbline++;
 		if (!split_line(&line, &stock))
-			return (free_check_var(&line, &stock, fdf, -1));
+			return (free_and_put_error(&line, &stock, fdf, -1));
 		if (!deal_nb_col(fdf, stock))
-			return (free_check_var(&line, &stock, fdf, -1));
+			return (free_and_put_error(&line, &stock, fdf, -1));
 		fdf->total += fdf->nbcol;
-		if (!check_line(stock))
-			return (free_check_var(&line, &stock, fdf, -1));
 		if (!add_to_tab(fdf, stock))
-			return (free_check_var(&line, &stock, fdf, -1));
+			return (free_and_put_error(&line, &stock, fdf, -1));
+		free_check_var(&line, &stock);
 	}
-	return (free_check_var(&line, &stock, fdf, ret));
-}
-
-int	check_line(char **stock)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (stock[i])
-	{
-		j = 0;
-		while (stock[i][j])
-		{
-			if (stock[i][j] != '-' && stock[i][j] != '+' && !ft_isdigit(stock[i][j]))
-				return (0);
-			if ((stock[i][j] == '-' || stock[i][j] == '+') && (!stock[i][j + 1] || !ft_isdigit(stock[i][j + 1])))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
+	return (free_and_put_error(&line, &stock, fdf, ret));
 }
 
 int	split_line(char **line, char ***stock)
@@ -57,16 +46,17 @@ int	split_line(char **line, char ***stock)
 
 int	add_to_tab(t_fdf *fdf, char **stock)
 {
-	t_point *new;
-	int i;
-	int start;
+	t_point	*new;
+	int		i;
+	int		start;
 
 	i = 0;
 	start = fdf->nbcol * (fdf->nbline - 1);
 	if (!(new = (t_point*)malloc(sizeof(t_point) * fdf->nbcol * fdf->nbline)))
 		return (0);
 	if (fdf->tab)
-		ft_memcpy(new, fdf->tab, sizeof(t_point) * fdf->nbcol * (fdf->nbline - 1));
+		ft_memcpy(new, fdf->tab, sizeof(t_point) * fdf->nbcol
+				* (fdf->nbline - 1));
 	i = 0;
 	while (stock[i])
 	{
@@ -82,8 +72,8 @@ int	add_to_tab(t_fdf *fdf, char **stock)
 
 int	deal_nb_col(t_fdf *fdf, char **stock)
 {
-	int res;
-	int i;
+	int	res;
+	int	i;
 
 	res = 0;
 	i = 0;

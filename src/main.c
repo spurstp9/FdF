@@ -1,28 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/28 11:48:12 by agardina          #+#    #+#             */
+/*   Updated: 2020/01/29 13:11:13 by agardina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
+	int fd;
+
 	if (argc != 2)
-		printf("usage: ./fdf <map>\n");
+		write(1, "usage: ./fdf <map>\n", 19);
 	else
-		ft_fdf(argv[1]);
+	{
+		if ((fd = open((const char*)argv[1], O_RDONLY)) == -1)
+			write(1, "No data found.\n", 15);
+		else
+			ft_fdf(fd);
+	}
 	return (0);
 }
 
-int	ft_fdf(char *map_path)
+int		ft_fdf(int fd)
 {
-	int			fd;
 	t_fdf		fdf;
 
-	if ((fd = open((const char*)map_path, O_RDONLY)) == -1)
-		return (0);
 	init_fdf(&fdf, 1);
 	if (check_map(fd, &fdf) > -1 && fdf.nbline > 0)
 	{
-		calculate_initial_zoom(&fdf);
+		fdf.mlx.mlx_ptr = mlx_init();
+		fdf.mlx.win_ptr = mlx_new_window(fdf.mlx.mlx_ptr, WIN_WIDTH,
+				WIN_HEIGHT, "FdF");
 		get_alt_max(&fdf);
 		get_alt_min(&fdf);
 		change_color(&fdf);
+		do_calculations(&fdf, 1);
+		get_edge_coord(&fdf);
+		calculate_initial_zoom(&fdf);
 		do_calculations(&fdf, 1);
 		center(&fdf);
 		ft_display(&fdf);
@@ -45,9 +66,10 @@ void	init_fdf(t_fdf *fdf, char proj)
 	fdf->x_rotation = 0.0;
 	fdf->y_rotation = 0.0;
 	fdf->z_rotation = 0.0;
-	fdf->mlx.mlx_ptr = mlx_init();
-	fdf->mlx.win_ptr = mlx_new_window(fdf->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FdF");
+	fdf->mlx.mlx_ptr = NULL;
+	fdf->mlx.win_ptr = NULL;
 	fdf->mlx.img_ptr = NULL;
+	fdf->mlx.img_data = NULL;
 	fdf->nbcol = -1;
 	fdf->nbline = 0;
 	fdf->total = 0;
@@ -68,30 +90,32 @@ void	reset_fdf(t_fdf *fdf, char proj)
 	fdf->x_rotation = 0.0;
 	fdf->y_rotation = 0.0;
 	fdf->z_rotation = 0.0;
+	do_calculations(fdf, 1);
+	get_edge_coord(fdf);
 	calculate_initial_zoom(fdf);
 	do_calculations(fdf, 1);
 	center(fdf);
 }
 
-void    do_calculations(t_fdf *fdf, char c)
+void	do_calculations(t_fdf *fdf, char c)
 {
-    int i;
-    t_point *a;
+	int		i;
+	t_point	*a;
 
-    i = 0;
-    while (i < fdf->total)
-    {
-        a = &(fdf->tab[i]);
-        if (c == 1)
-        {
-            apply_altitude(fdf, a);
-            apply_zoom(fdf, a);
-            apply_rotation(fdf, a);
-            apply_proj(fdf, a);
-            apply_shift(fdf, a);
-        }
-        else
-            apply_only_shift(fdf, a);
-        i++;
-    }
+	i = 0;
+	while (i < fdf->total)
+	{
+		a = &(fdf->tab[i]);
+		if (c == 1)
+		{
+			apply_altitude(fdf, a);
+			apply_zoom(fdf, a);
+			apply_rotation(fdf, a);
+			apply_proj(fdf, a);
+			apply_shift(fdf, a);
+		}
+		else
+			apply_only_shift(fdf, a);
+		i++;
+	}
 }
