@@ -13,8 +13,8 @@
 #ifndef FDF_H
 
 # define FDF_H
-# define WIN_HEIGHT 1200
-# define WIN_WIDTH 1800
+# define WIN_HEIGHT 700
+# define WIN_WIDTH 1000
 # define AQUA_MARINE 0x7FFFD4
 # define BEIGE 0xF5F5DC
 # define BLUE 0x0000CD
@@ -94,11 +94,23 @@ typedef struct			s_gradient
 	t_point				finish;
 }						t_gradient;
 
+typedef struct			s_rot_data
+{
+	float A;
+	float B;
+	float C;
+	float D;
+	float E;
+	float F;
+	float AD;
+	float BD;
+}						t_rot_data;
+
 int						add_to_tab(t_fdf *fdf, char **stock);
 void					apply_altitude(t_fdf *fdf, t_point *a);
 void					apply_only_shift(t_fdf *fdf, t_point *a);
 void					apply_proj(t_fdf *fdf, t_point *a);
-void					apply_rotation(t_fdf *fdf, t_point *a);
+void					apply_rotation(t_fdf *fdf, t_point *a, t_rot_data *r);
 void					apply_shift(t_fdf *fdf, t_point *a);
 void					apply_zoom(t_fdf *fdf, t_point *a);
 void					cabinet(t_point *p);
@@ -150,11 +162,9 @@ int						print_line_img_case2(t_mlx_data *data, t_point p1,
 void					reset_fdf(t_fdf *fdf, char proj);
 int						set_fdf_color(t_fdf *fdf);
 void					set_point_color(t_fdf *fdf, t_point *a);
+void					set_rot_data(t_fdf *fdf, t_rot_data *r);
 void					change_color(t_fdf *fdf);
 int						split_line(char **line, char ***stock);
 void					swap_points(t_point *a, t_point *b);
-void					x_rotation(t_fdf *fdf, t_point *a);
-void					y_rotation(t_fdf *fdf, t_point *a);
-void					z_rotation(t_fdf *fdf, t_point *a);
 
 #endif

@@ -101,21 +101,41 @@ void	do_calculations(t_fdf *fdf, char c)
 {
 	int		i;
 	t_point	*a;
+	t_rot_data r;
 
 	i = 0;
-	while (i < fdf->total)
+	set_rot_data(fdf, &r);
+	if (c == 1)
 	{
-		a = &(fdf->tab[i]);
-		if (c == 1)
+		while (i < fdf->total)
 		{
-			apply_altitude(fdf, a);
-			apply_zoom(fdf, a);
-			apply_rotation(fdf, a);
-			apply_proj(fdf, a);
-			apply_shift(fdf, a);
+			a = &(fdf->tab[i]);
+			if (c == 1)
+			{
+				apply_altitude(fdf, a);
+				apply_zoom(fdf, a);
+			}
+			i++;
 		}
-		else
+		get_edge_coord(fdf);
+		i = 0;
+		while (i < fdf->total)
+		{
+			a = &(fdf->tab[i]);
+				apply_rotation(fdf, a, &r);
+				apply_proj(fdf, a);
+				apply_shift(fdf, a);
+			i++;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < fdf->total)
+		{
+			a = &(fdf->tab[i]);
 			apply_only_shift(fdf, a);
-		i++;
+			i++;
+		}
 	}
 }

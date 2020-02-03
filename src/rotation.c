@@ -29,42 +29,28 @@ void	change_rotation(t_fdf *fdf, int keycode)
 	do_calculations(fdf, 1);
 }
 
-void	apply_rotation(t_fdf *fdf, t_point *a)
-{
-	x_rotation(fdf, a);
-	y_rotation(fdf, a);
-	z_rotation(fdf, a);
-}
-
-void	x_rotation(t_fdf *fdf, t_point *a)
-{
-	int old_y2;
-	int old_z2;
-
-	old_y2 = a->y2;
-	old_z2 = a->z2;
-	a->y2 = old_y2 * cos(fdf->x_rotation) + old_z2 * sin(fdf->x_rotation);
-	a->z2 = -old_y2 * sin(fdf->x_rotation) + old_z2 * cos(fdf->x_rotation);
-}
-
-void	y_rotation(t_fdf *fdf, t_point *a)
-{
-	int old_x2;
-	int old_z2;
-
-	old_x2 = a->x2;
-	old_z2 = a->z2;
-	a->x2 = old_x2 * cos(fdf->y_rotation) + old_z2 * sin(fdf->y_rotation);
-	a->z2 = -old_x2 * sin(fdf->y_rotation) + old_z2 * cos(fdf->y_rotation);
-}
-
-void	z_rotation(t_fdf *fdf, t_point *a)
+void	apply_rotation(t_fdf *fdf, t_point *a, t_rot_data *r)
 {
 	int old_x2;
 	int old_y2;
+	int old_z2;
 
-	old_x2 = a->x2;
-	old_y2 = a->y2;
-	a->x2 = old_x2 * cos(fdf->z_rotation) - old_y2 * sin(fdf->z_rotation);
-	a->y2 = old_x2 * sin(fdf->z_rotation) + old_y2 * cos(fdf->z_rotation);
+	old_x2 = a->x2 - ((fdf->x_max - fdf->x_min) / 2);
+	old_y2 = a->y2 - ((fdf->y_max - fdf->y_min) / 2);
+	old_z2 = a->z2;
+	a->x2 = old_x2 * r->C * r->E - old_y2 * r->C * r->F + r->D * old_z2;
+	a->y2 = old_x2 * r->BD * r->E + old_x2 * r->A * r->F - old_y2 * r->BD * r->F + old_y2 * r->A * r->E - old_z2 * r->B * r->C;
+	a->z2 = -r->AD * r->E * old_x2 + r->B * r->F * old_x2 + r->AD * r->F * old_y2 + r->B * r->E * old_y2 + r->A * r->C * old_z2;
+}
+
+void	set_rot_data(t_fdf *fdf, t_rot_data *r)
+{
+	r->A = cos(fdf->x_rotation);
+	r->B = sin(fdf->x_rotation);
+	r->C = cos(fdf->y_rotation);
+	r->D = sin(fdf->y_rotation);
+	r->E = cos(fdf->z_rotation);
+	r->F = sin(fdf->z_rotation);
+	r->AD = r->A * r->D;
+	r->BD = r->B * r->D;
 }
