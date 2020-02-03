@@ -6,7 +6,7 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:48:47 by agardina          #+#    #+#             */
-/*   Updated: 2020/01/28 11:48:50 by agardina         ###   ########.fr       */
+/*   Updated: 2020/02/03 18:59:26 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	change_rotation(t_fdf *fdf, int keycode)
 {
-	if (keycode == 15)
+	if (keycode == 20 || keycode == 25)
 		fdf->x_rotation -= 0.261799;
-	else if (keycode == 17)
+	if (keycode == 21 || keycode == 29)
 		fdf->x_rotation += 0.261799;
-	else if (keycode == 3)
+	if (keycode == 23 || keycode == 25)
 		fdf->y_rotation -= 0.261799;
-	else if (keycode == 5)
+	if (keycode == 22 || keycode == 29)
 		fdf->y_rotation += 0.261799;
-	else if (keycode == 9)
+	if (keycode == 26 || keycode == 25)
 		fdf->z_rotation -= 0.261799;
-	else if (keycode == 11)
+	if (keycode == 28 || keycode == 29)
 		fdf->z_rotation += 0.261799;
 	do_calculations(fdf, 1);
 }
@@ -38,19 +38,21 @@ void	apply_rotation(t_fdf *fdf, t_point *a, t_rot_data *r)
 	old_x2 = a->x2 - ((fdf->x_max - fdf->x_min) / 2);
 	old_y2 = a->y2 - ((fdf->y_max - fdf->y_min) / 2);
 	old_z2 = a->z2;
-	a->x2 = old_x2 * r->C * r->E - old_y2 * r->C * r->F + r->D * old_z2;
-	a->y2 = old_x2 * r->BD * r->E + old_x2 * r->A * r->F - old_y2 * r->BD * r->F + old_y2 * r->A * r->E - old_z2 * r->B * r->C;
-	a->z2 = -r->AD * r->E * old_x2 + r->B * r->F * old_x2 + r->AD * r->F * old_y2 + r->B * r->E * old_y2 + r->A * r->C * old_z2;
+	a->x2 = old_x2 * r->c * r->e - old_y2 * r->c * r->f + r->d * old_z2;
+	a->y2 = old_x2 * r->bd * r->e + old_x2 * r->a * r->f
+		- old_y2 * r->bd * r->f + old_y2 * r->a * r->e - old_z2 * r->b * r->c;
+	a->z2 = -r->ad * r->e * old_x2 + r->b * r->f * old_x2
+		+ r->ad * r->f * old_y2 + r->b * r->e * old_y2 + r->a * r->c * old_z2;
 }
 
 void	set_rot_data(t_fdf *fdf, t_rot_data *r)
 {
-	r->A = cos(fdf->x_rotation);
-	r->B = sin(fdf->x_rotation);
-	r->C = cos(fdf->y_rotation);
-	r->D = sin(fdf->y_rotation);
-	r->E = cos(fdf->z_rotation);
-	r->F = sin(fdf->z_rotation);
-	r->AD = r->A * r->D;
-	r->BD = r->B * r->D;
+	r->a = cos(fdf->x_rotation);
+	r->b = sin(fdf->x_rotation);
+	r->c = cos(fdf->y_rotation);
+	r->d = sin(fdf->y_rotation);
+	r->e = cos(fdf->z_rotation);
+	r->f = sin(fdf->z_rotation);
+	r->ad = r->a * r->d;
+	r->bd = r->b * r->d;
 }

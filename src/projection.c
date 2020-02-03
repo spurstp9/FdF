@@ -36,8 +36,8 @@ void	iso(t_point *p)
 
 	old_x2 = p->x2;
 	old_y2 = p->y2;
-	p->x2 = (old_x2 - old_y2) * cos(0.46373398);
-	p->y2 = -(p->z2) + (old_x2 + p->y2) * sin(0.46373398);
+	p->x2 = (old_x2 - old_y2) * cos(0.523599);
+	p->y2 = -(p->z2) + (old_x2 + p->y2) * sin(0.523599);
 }
 
 void	cabinet(t_point *p)

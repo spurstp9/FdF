@@ -32,8 +32,7 @@ int	key_hook(int keycode, void *param)
 	else if (keycode == 18)
 		((t_fdf*)param)->display_menu =
 			((t_fdf*)param)->display_menu == 1 ? 0 : 1;
-	else if (keycode == 15 || keycode == 17 || keycode == 3 || keycode == 5
-			|| keycode == 9 || keycode == 11)
+	else if (20 <= keycode && keycode <= 29 && keycode != 27 && keycode != 24)
 		change_rotation((t_fdf*)param, keycode);
 	else if (keycode == 8)
 		center((t_fdf*)param);

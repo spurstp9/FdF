@@ -6,15 +6,15 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:33:36 by agardina          #+#    #+#             */
-/*   Updated: 2020/01/29 11:03:13 by agardina         ###   ########.fr       */
+/*   Updated: 2020/02/03 19:07:50 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 
 # define FDF_H
-# define WIN_HEIGHT 700
-# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1200
+# define WIN_WIDTH 2000
 # define AQUA_MARINE 0x7FFFD4
 # define BEIGE 0xF5F5DC
 # define BLUE 0x0000CD
@@ -96,14 +96,14 @@ typedef struct			s_gradient
 
 typedef struct			s_rot_data
 {
-	float A;
-	float B;
-	float C;
-	float D;
-	float E;
-	float F;
-	float AD;
-	float BD;
+	float				a;
+	float				b;
+	float				c;
+	float				d;
+	float				e;
+	float				f;
+	float				ad;
+	float				bd;
 }						t_rot_data;
 
 int						add_to_tab(t_fdf *fdf, char **stock);
@@ -126,6 +126,8 @@ int						check_map(int fd, t_fdf *fdf);
 int						deal_nb_col(t_fdf *fdf, char **stock);
 void					display_menu(t_fdf *fdf);
 void					do_calculations(t_fdf *fdf, char c);
+void					do_calculations1(t_fdf *fdf);
+void					do_calculations2(t_fdf *fdf);
 void					draw_map(t_fdf *fdf);
 void					draw_segment(t_fdf *fdf, t_point a, t_point b);
 void					fill_img_data(t_mlx_data *data, t_point p1, int color);
