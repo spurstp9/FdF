@@ -6,7 +6,7 @@
 /*   By: agardina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 11:47:17 by agardina          #+#    #+#             */
-/*   Updated: 2020/01/28 12:24:43 by agardina         ###   ########.fr       */
+/*   Updated: 2020/02/03 19:41:05 by agardina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	display_menu(t_fdf *fdf)
 		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 92, 0xFDEE00,
 				"Center: C");
 		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 112, 0xFDEE00,
-				"X/Y/Z axis rotation: R-T/F-G/V-B");
+				"X/Y/Z/all axes rotation: 3-4/5-6/7-8/9-0");
 		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 132, 0xFDEE00,
 				"Change color: 2");
 		mlx_string_put(fdf->mlx.mlx_ptr, fdf->mlx.win_ptr, 10, 152, 0xFDEE00,
